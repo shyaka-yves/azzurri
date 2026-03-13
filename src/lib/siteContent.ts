@@ -86,7 +86,8 @@ export type MenuIntroContent = {
 };
 
 export type MenuContent = {
-  pdfUrl: string;
+  restaurantPdfUrl: string;
+  clubPdfUrl: string;
 };
 
 export type DescriptionContent = {
@@ -263,12 +264,13 @@ function getDefaultContent(): SiteContent {
       hoursLines: [
         "Monday - Sunday: 10:00 AM - 12:00 PM",
       ],
-      email: "info@azzurri.rw",
-      phone: "+250 788 300 000",
+      email: "reservation@azzurrirwanda.com",
+      phone: "+250 792 880 335",
       mapEmbedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d390.110208989431!2d30.085970473208192!3d-1.9614453068728352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca777ef43544b%3A0xb1c95bbfefb7ff00!2sLa%20Creola!5e0!3m2!1sen!2srw!4v1771455504152!5m2!1sen!2srw",
     },
     menu: {
-      pdfUrl: "",
+      restaurantPdfUrl: "",
+      clubPdfUrl: "",
     },
     specialty: {
       title: "Speciality",

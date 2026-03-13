@@ -56,8 +56,8 @@ export default async function ContactPage() {
 
               <div className="space-y-1 text-sm text-zinc-300 sm:text-base">
                 <p className="text-sm font-medium text-[#D4AF37]">Contact</p>
-                <p className="whitespace-nowrap">+250 793 084 995</p>
-                <p className="whitespace-nowrap">reservations@azzurri.com</p>
+                <p className="whitespace-nowrap">+250 792 880 335</p>
+                <p className="whitespace-nowrap">reservation@azzurrirwanda.com</p>
               </div>
 
               <div className="pt-2">

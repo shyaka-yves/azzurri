@@ -79,9 +79,9 @@ export default async function Home() {
               <Image
                 src="/logo.png"
                 alt={content.hero.brand}
-                width={450}
-                height={150}
-                className="h-auto w-40 md:w-56 lg:w-[280px]"
+                width={600}
+                height={200}
+                className="h-auto w-48 md:w-64 lg:w-[350px]"
                 priority
               />
             </div>
@@ -94,7 +94,7 @@ export default async function Home() {
           </FadeIn>
 
           <FadeIn delay={220}>
-            <div className="mt-14 flex flex-col gap-8 sm:flex-row">
+            <div className="mt-20 flex flex-col gap-8 sm:flex-row">
               <a
                 href={content.hero.primaryCtaHref}
                 className="inline-flex items-center justify-center rounded-lg bg-azzurri-blue px-14 py-4 text-xs font-bold uppercase tracking-[0.3em] text-black transition-all hover:brightness-110 active:scale-95 shadow-2xl shadow-blue-500/10"
@@ -126,13 +126,13 @@ export default async function Home() {
                 </span>
               </div>
             )}
-            <h2 className="heading-font text-5xl font-medium tracking-tight text-azzurri-blue md:text-6xl">
+            <h2 className="heading-font text-5xl font-medium tracking-tight text-[#EFD077] md:text-6xl">
               {content.events.title}
             </h2>
             <p className="mt-4 text-[12px] uppercase tracking-[0.4em] text-zinc-400">
               {content.events.description}
             </p>
-            <div className="h-0.5 w-12 bg-azzurri-blue mx-auto mt-8" />
+            <div className="h-0.5 w-12 bg-[#EFD077] mx-auto mt-8" />
           </FadeIn>
 
           <div className="mt-10 grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
@@ -149,7 +149,7 @@ export default async function Home() {
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   </div>
                   <div className="flex flex-1 flex-col px-6 pb-10 pt-8">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-azzurri-blue">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4AF37]">
                       {event.date}
                     </p>
                     <h3 className="mt-4 text-2xl font-medium tracking-tight text-white group-hover:text-azzurri-blue transition-colors">
@@ -199,11 +199,11 @@ export default async function Home() {
 
               <div className="flex gap-16 pt-10 border-t border-white/10">
                 <div>
-                  <p className="heading-font text-5xl font-semibold text-azzurri-blue">25+</p>
+                  <p className="heading-font text-5xl font-semibold text-[#EFD077]">25+</p>
                   <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-400 mt-2 font-bold">Years of Excellence</p>
                 </div>
                 <div>
-                  <p className="heading-font text-5xl font-semibold text-azzurri-blue">100+</p>
+                  <p className="heading-font text-5xl font-semibold text-[#EFD077]">100+</p>
                   <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-500 mt-2 font-bold">Signature Dishes</p>
                 </div>
               </div>
@@ -227,10 +227,10 @@ export default async function Home() {
           <FadeIn delay={120} className="w-full lg:w-1/2">
             <div className="space-y-10">
               <div className="space-y-4">
-                <h2 className="heading-font text-5xl font-medium tracking-tight text-azzurri-blue md:text-7xl">
+                <h2 className="heading-font text-5xl font-medium tracking-tight text-[#EFD077] md:text-7xl">
                   {content.excellence.title}
                 </h2>
-                <div className="h-0.5 w-16 bg-azzurri-blue" />
+                <div className="h-0.5 w-16 bg-[#EFD077]" />
               </div>
 
               <div className="space-y-8 text-base leading-relaxed text-zinc-400 font-light lg:text-lg">
@@ -244,8 +244,8 @@ export default async function Home() {
 
               <div className="flex gap-16 pt-8">
                 {content.excellence.stats.map((stat, i) => (
-                  <div key={i} className="border-l-2 border-azzurri-blue pl-8 py-1">
-                    <p className="heading-font text-5xl font-semibold text-azzurri-blue">{stat.value}</p>
+                  <div key={i} className="border-l-2 border-[#EFD077] pl-8 py-1">
+                    <p className="heading-font text-5xl font-semibold text-[#EFD077]">{stat.value}</p>
                     <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-400 mt-2 font-bold">{stat.label}</p>
                   </div>
                 ))}
@@ -258,10 +258,10 @@ export default async function Home() {
       <section className="py-12 lg:py-16">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <FadeIn>
-            <h2 className="heading-font text-[10px] uppercase tracking-[0.4em] text-azzurri-blue">
+            <h2 className="heading-font text-[10px] uppercase tracking-[0.4em] text-[#D4AF37]">
               {content.descriptionSection.heading}
             </h2>
-            <div className="h-0.5 w-12 bg-azzurri-blue mx-auto mt-6" />
+            <div className="h-0.5 w-12 bg-[#EFD077] mx-auto mt-6" />
             <div className="mt-10 space-y-6">
               {content.descriptionSection.paragraphs.map((p, i) => (
                 <p key={i} className="text-lg leading-relaxed text-zinc-300 font-light">
@@ -276,7 +276,7 @@ export default async function Home() {
       <section className="pt-0 pb-16">
         <div className="mx-auto max-w-6xl px-4">
           <FadeIn className="mb-14 text-center">
-            <h2 className="heading-font text-4xl font-medium tracking-tight text-azzurri-blue">
+            <h2 className="heading-font text-4xl font-medium tracking-tight text-[#EFD077]">
               {content.testimonials.title}
             </h2>
             <p className="mt-4 text-[10px] uppercase tracking-[0.3em] text-zinc-400">
@@ -296,13 +296,13 @@ export default async function Home() {
       <section className="bg-black py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <FadeIn className="text-center mb-12">
-            <h2 className="heading-font text-5xl font-medium tracking-tight text-azzurri-blue md:text-6xl">
+            <h2 className="heading-font text-5xl font-medium tracking-tight text-[#EFD077] md:text-6xl">
               Gallery
             </h2>
             <p className="mt-4 text-[12px] uppercase tracking-[0.4em] text-zinc-400">
               Visualizing the Azzurri Experience
             </p>
-            <div className="h-0.5 w-12 bg-azzurri-blue mx-auto mt-8" />
+            <div className="h-0.5 w-12 bg-[#EFD077] mx-auto mt-8" />
           </FadeIn>
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
@@ -347,7 +347,7 @@ export default async function Home() {
           <div className="grid gap-20 lg:grid-cols-2 lg:items-start">
             <FadeIn className="space-y-12">
               <div className="space-y-6">
-                <h2 className="heading-font text-6xl font-medium tracking-tight text-azzurri-blue">
+                <h2 className="heading-font text-6xl font-medium tracking-tight text-[#EFD077]">
                   {content.contact.title}
                 </h2>
                 <p className="text-zinc-400 text-[15px] max-w-md leading-relaxed">

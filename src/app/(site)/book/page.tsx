@@ -87,14 +87,14 @@ export default function BookPage() {
     <main className="min-h-screen bg-gradient-to-b from-black via-slate-950 to-black">
       <div className="mx-auto flex max-w-4xl flex-col gap-10 px-4 py-16 sm:py-20">
         <div>
-          <p className="text-xs uppercase tracking-[0.25em] text-azzurri-blue">Book a Table</p>
+          <p className="text-xs uppercase tracking-[0.25em] text-[#D4AF37]">Book a Table</p>
           <h1 className="heading-font mt-3 text-3xl font-semibold text-white sm:text-4xl">
             Reserve your evening at Azzurri
           </h1>
           <p className="mt-3 max-w-2xl text-sm text-zinc-300 sm:text-base">
             Share a few details and we&apos;ll confirm your reservation as soon as possible.
             Bookings must be at least{' '}
-            <span className="font-semibold text-azzurri-blue">2 hours</span> from the current time.
+            <span className="font-semibold text-[#D4AF37]">2 hours</span> from the current time.
           </p>
         </div>
 

@@ -709,12 +709,22 @@ export default function AdminContentPage() {
       <EditorCard title="Menu & Specials">
         <div className="space-y-6">
           <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Menu PDF URL</p>
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Restaurant Menu PDF URL</p>
             <input
               type="text"
-              value={content.menu.pdfUrl || ""}
-              onChange={(e) => setContent((c: any) => ({ ...c, menu: { ...c.menu, pdfUrl: e.target.value } }))}
-              placeholder="e.g. /menu.pdf or https://..."
+              value={content.menu.restaurantPdfUrl || ""}
+              onChange={(e) => setContent((c: any) => ({ ...c, menu: { ...c.menu, restaurantPdfUrl: e.target.value } }))}
+              placeholder="e.g. /restaurant-menu.pdf or https://..."
+              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+            />
+          </div>
+          <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Club & Lounge Menu PDF URL</p>
+            <input
+              type="text"
+              value={content.menu.clubPdfUrl || ""}
+              onChange={(e) => setContent((c: any) => ({ ...c, menu: { ...c.menu, clubPdfUrl: e.target.value } }))}
+              placeholder="e.g. /club-menu.pdf or https://..."
               className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
             />
           </div>

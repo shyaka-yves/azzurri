@@ -53,9 +53,9 @@ export function Navbar() {
             <Image
               src="/logo.png"
               alt="Azzurri"
-              width={140}
-              height={44}
-              className="h-9 w-auto object-contain sm:h-11"
+              width={180}
+              height={56}
+              className="h-11 w-auto object-contain sm:h-14"
               onError={() => setLogoError(true)}
             />
           )}

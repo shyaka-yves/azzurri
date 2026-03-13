@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { FadeIn } from "@/components/FadeIn";
 import { GallerySlideshow } from "@/components/GallerySlideshow";
+import { ZoneSelector } from "@/components/ZoneSelector";
 
 type ImageItem = { id: string; src: string; label: string };
 
@@ -18,10 +19,11 @@ export function GalleryView({
         isOpen: false,
         index: 0
     });
+    const [activeZone, setActiveZone] = useState<'restaurant' | 'club'>('restaurant');
 
     const images: ImageItem[] = galleryImages.length > 0
         ? galleryImages.map(img => ({ id: img.id, src: img.imageUrl, label: img.label }))
-        : content.gallery.items.map((img: any, idx: number) => ({ id: `content-${idx}`, src: img.imageSrc, label: img.alt }));
+        : (content.gallery.items || []).map((img: any, idx: number) => ({ id: `content-${idx}`, src: img.imageSrc, label: img.alt }));
 
     return (
         <div className="relative min-h-screen bg-black overflow-x-hidden">
@@ -38,7 +40,9 @@ export function GalleryView({
 
             <section className="bg-black/95 pb-24">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6">
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                    <ZoneSelector activeZone={activeZone} onZoneChange={setActiveZone} />
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mt-8">
                         {images.map((img, idx) => (
                             <FadeIn key={img.id} delay={idx * 30}>
                                 <button

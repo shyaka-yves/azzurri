@@ -30,10 +30,10 @@ export default async function AboutPage() {
           <FadeIn delay={120} className="w-full lg:w-1/2">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="heading-font text-4xl font-medium tracking-tight text-azzurri-blue md:text-5xl lg:text-6xl">
+                <h1 className="heading-font text-4xl font-medium tracking-tight text-[#EFD077] md:text-5xl lg:text-6xl">
                   About Azzurri
                 </h1>
-                <div className="h-0.5 w-16 bg-azzurri-blue" />
+                <div className="h-0.5 w-16 bg-[#EFD077]" />
               </div>
 
               <div className="space-y-6 text-zinc-300">
