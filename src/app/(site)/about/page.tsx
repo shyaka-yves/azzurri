@@ -30,10 +30,10 @@ export default async function AboutPage() {
           <FadeIn delay={120} className="w-full lg:w-1/2">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="heading-font text-4xl font-medium tracking-tight text-[#EFD077] md:text-5xl lg:text-6xl">
+                <h1 className="heading-font text-4xl font-medium tracking-tight text-azzurri-blue md:text-5xl lg:text-6xl">
                   About Azzurri
                 </h1>
-                <div className="h-0.5 w-16 bg-[#EFD077]" />
+                <div className="h-0.5 w-16 bg-azzurri-blue" />
               </div>
 
               <div className="space-y-6 text-zinc-300">
@@ -63,7 +63,7 @@ export default async function AboutPage() {
 
               <a
                 href="/book"
-                className="inline-flex items-center justify-center rounded-lg bg-[#FDE68A] px-12 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black transition-all hover:scale-105 active:scale-95 shadow-xl shadow-yellow-500/10"
+                className="inline-flex items-center justify-center rounded-lg bg-azzurri-blue px-12 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black transition-all hover:scale-105 active:scale-95 shadow-xl shadow-blue-500/10"
               >
                 BOOK A TABLE
               </a>

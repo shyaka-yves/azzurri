@@ -39,7 +39,7 @@ export function Testimonials({
         <div className="card-glass overflow-hidden rounded-3xl bg-[#030712] px-10 py-16 text-center shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] border-white/[0.03]">
           <div className="relative">
             <div className="flex justify-center mb-8">
-              <span className="text-4xl text-[#EFD077] opacity-60 italic font-serif">“</span>
+              <span className="text-4xl text-azzurri-blue opacity-60 italic font-serif">“</span>
             </div>
 
             <p className="mx-auto max-w-2xl text-[18px] leading-[1.8] text-zinc-300 font-light italic tracking-wide md:text-xl">
@@ -47,9 +47,9 @@ export function Testimonials({
             </p>
 
             <div className="mt-12 flex flex-col items-center gap-4">
-              <div className="flex items-center gap-2 text-[#EFD077] text-sm mb-1">
+              <div className="flex items-center gap-2 text-azzurri-blue text-sm mb-1">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <span key={i} className={i < active.rating ? "text-[#EFD077]" : "text-zinc-800"}>
+                  <span key={i} className={i < active.rating ? "text-azzurri-blue" : "text-zinc-800"}>
                     ★
                   </span>
                 ))}
@@ -67,7 +67,7 @@ export function Testimonials({
           <button
             type="button"
             onClick={() => setActiveIndex((prev) => (prev - 1 + data.length) % data.length)}
-            className="pointer-events-auto inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/5 bg-black/40 text-zinc-400 hover:border-[#EFD077] hover:text-[#EFD077] hover:bg-black/60 transition-all duration-300 backdrop-blur-sm"
+            className="pointer-events-auto inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/5 bg-black/40 text-zinc-400 hover:border-azzurri-blue hover:text-azzurri-blue hover:bg-black/60 transition-all duration-300 backdrop-blur-sm"
             aria-label="Previous testimonial"
           >
             ‹
@@ -88,7 +88,7 @@ export function Testimonials({
             <button
               key={index}
               onClick={() => setActiveIndex(index)}
-              className={`h-0.5 transition-all duration-500 ${index === activeIndex ? "w-10 bg-[#EFD077]" : "w-4 bg-zinc-800"
+              className={`h-0.5 transition-all duration-500 ${index === activeIndex ? "w-10 bg-azzurri-blue" : "w-4 bg-zinc-800"
                 }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />

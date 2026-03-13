@@ -87,14 +87,14 @@ export default function BookPage() {
     <main className="min-h-screen bg-gradient-to-b from-black via-slate-950 to-black">
       <div className="mx-auto flex max-w-4xl flex-col gap-10 px-4 py-16 sm:py-20">
         <div>
-          <p className="text-xs uppercase tracking-[0.25em] text-gold">Book a Table</p>
+          <p className="text-xs uppercase tracking-[0.25em] text-azzurri-blue">Book a Table</p>
           <h1 className="heading-font mt-3 text-3xl font-semibold text-white sm:text-4xl">
             Reserve your evening at Azzurri
           </h1>
           <p className="mt-3 max-w-2xl text-sm text-zinc-300 sm:text-base">
             Share a few details and we&apos;ll confirm your reservation as soon as possible.
             Bookings must be at least{' '}
-            <span className="font-semibold text-gold">2 hours</span> from the current time.
+            <span className="font-semibold text-azzurri-blue">2 hours</span> from the current time.
           </p>
         </div>
 
@@ -184,7 +184,7 @@ export default function BookPage() {
                 rows={3}
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="mt-2 w-full rounded-2xl border border-zinc-700 bg-black/60 px-4 py-2.5 text-sm text-white outline-none ring-0 transition focus:border-gold"
+                className="mt-2 w-full rounded-2xl border border-zinc-700 bg-black/60 px-4 py-2.5 text-sm text-white outline-none ring-0 transition focus:border-azzurri-blue"
                 placeholder="Allergies, special occasions, or seating preferences"
               />
             </div>
@@ -201,7 +201,7 @@ export default function BookPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="gold-gradient inline-flex items-center justify-center rounded-full px-8 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-black shadow-md shadow-yellow-500/40 transition hover:shadow-yellow-400/60 disabled:cursor-not-allowed disabled:opacity-70"
+              className="bg-azzurri-blue inline-flex items-center justify-center rounded-full px-8 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-black shadow-md shadow-blue-500/40 transition hover:shadow-blue-400/60 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {submitting ? 'Sending...' : 'Submit Booking'}
             </button>

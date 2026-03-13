@@ -62,14 +62,14 @@ export function Navbar() {
         </Link>
 
         <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-[13px] uppercase tracking-widest text-zinc-400 lg:flex xl:gap-10">
-          <Link href="/" className="whitespace-nowrap transition-colors hover:text-[#EFD077]">HOME</Link>
-          <Link href="/about" className="whitespace-nowrap transition-colors hover:text-[#EFD077]">ABOUT US</Link>
+          <Link href="/" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">HOME</Link>
+          <Link href="/about" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">ABOUT US</Link>
 
           <div className="relative" ref={dropdownRef}>
             <button
               type="button"
               onClick={() => setRestaurantOpen((o) => !o)}
-              className="flex items-center gap-1 transition-colors hover:text-[#EFD077]"
+              className="flex items-center gap-1 transition-colors hover:text-azzurri-blue"
               aria-expanded={restaurantOpen}
               aria-haspopup="true"
             >
@@ -81,7 +81,7 @@ export function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block px-4 py-2 text-left text-sm capitalize text-white hover:bg-zinc-800 hover:text-[#EFD077]"
+                    className="block px-4 py-2 text-left text-sm capitalize text-white hover:bg-zinc-800 hover:text-azzurri-blue"
                     onClick={() => setRestaurantOpen(false)}
                   >
                     {item.label}
@@ -91,15 +91,15 @@ export function Navbar() {
             )}
           </div>
 
-          <Link href="/events" className="whitespace-nowrap transition-colors hover:text-[#EFD077]">EVENTS</Link>
-          <Link href="/gallery" className="whitespace-nowrap transition-colors hover:text-[#EFD077]">GALLERY</Link>
-          <Link href="/contact" className="whitespace-nowrap transition-colors hover:text-[#EFD077]">CONTACT</Link>
+          <Link href="/events" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">EVENTS</Link>
+          <Link href="/gallery" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">GALLERY</Link>
+          <Link href="/contact" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">CONTACT</Link>
         </nav>
 
         <div className="flex items-center gap-3">
           <a
             href="/book"
-            className="hidden border border-[#EFD077] bg-transparent px-8 py-3 text-[11px] uppercase tracking-[0.2em] text-[#EFD077] transition-all hover:bg-[#EFD077] hover:text-black lg:inline-flex"
+            className="hidden border border-azzurri-blue bg-transparent px-8 py-3 text-[11px] uppercase tracking-[0.2em] text-azzurri-blue transition-all hover:bg-azzurri-blue hover:text-black lg:inline-flex"
           >
             BOOK A TABLE
           </a>
@@ -130,21 +130,23 @@ export function Navbar() {
         <nav className="flex flex-col px-4 py-6">
           <Link href="/" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-[#D4AF37]">HOME</Link>
           <Link href="/about" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-[#D4AF37]">ABOUT US</Link>
+          <Link href="/" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">HOME</Link>
+          <Link href="/about" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">ABOUT US</Link>
 
           <div className="border-b border-zinc-800 py-2">
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-zinc-400">
               A premium dining destination in Kigali where bold African flavors meet Asian craftsmanship in a luxurious rooftop setting.
             </p>
             {RESTAURANT_DROPDOWN.map((item) => (
-              <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="block py-2 pl-4 text-sm capitalize text-white transition-colors hover:text-[#D4AF37]">{item.label}</Link>
+              <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="block py-2 pl-4 text-sm capitalize text-white transition-colors hover:text-azzurri-blue">{item.label}</Link>
             ))}
           </div>
 
-          <Link href="/events" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-[#D4AF37]">EVENTS</Link>
-          <Link href="/gallery" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-[#D4AF37]">GALLERY</Link>
-          <Link href="/contact" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-[#D4AF37]">CONTACT</Link>
+          <Link href="/events" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">EVENTS</Link>
+          <Link href="/gallery" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">GALLERY</Link>
+          <Link href="/contact" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">CONTACT</Link>
 
-          <a href="/book" onClick={() => setMobileOpen(false)} className="mt-4 flex items-center justify-center border border-[#D4AF37] bg-transparent py-3 text-sm uppercase tracking-widest text-white">
+          <a href="/book" onClick={() => setMobileOpen(false)} className="mt-4 flex items-center justify-center border border-azzurri-blue bg-transparent py-3 text-sm uppercase tracking-widest text-white">
             BOOK A TABLE
           </a>
         </nav>

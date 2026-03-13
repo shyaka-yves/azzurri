@@ -19,7 +19,7 @@ export default async function EventsPage() {
       <section className="py-8 sm:py-12 bg-black/95">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <FadeIn>
-            <p className="text-xs uppercase tracking-[0.3em] text-gold">
+            <p className="text-xs uppercase tracking-[0.3em] text-azzurri-blue">
               Evenings at Azzurri
             </p>
             <h1 className="heading-font mt-4 text-3xl font-semibold text-white sm:text-4xl">
@@ -54,13 +54,13 @@ export default async function EventsPage() {
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                     </div>
                     <div className="flex flex-1 flex-col px-4 pb-4 pt-3">
-                      <p className="text-xs font-medium uppercase tracking-[0.2em] text-gold">
+                      <p className="text-xs font-medium uppercase tracking-[0.2em] text-azzurri-blue">
                         {event.date}
                       </p>
                       <h2 className="mt-1.5 text-sm font-semibold text-white">{event.title}</h2>
                       <p className="mt-1.5 text-xs text-zinc-300 line-clamp-2">{event.description}</p>
                       <button
-                        className="gold-gradient mt-3 inline-flex items-center justify-center rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-black shadow-md shadow-yellow-500/25 transition hover:shadow-yellow-400/40"
+                        className="bg-azzurri-blue mt-3 inline-flex items-center justify-center rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-black shadow-md shadow-blue-500/25 transition hover:shadow-blue-400/40"
                         aria-label={`Learn more about ${event.title}`}
                       >
                         Learn More

@@ -97,7 +97,7 @@ export default async function Home() {
             <div className="mt-14 flex flex-col gap-8 sm:flex-row">
               <a
                 href={content.hero.primaryCtaHref}
-                className="inline-flex items-center justify-center rounded-lg bg-[#FDE68A] px-14 py-4 text-xs font-bold uppercase tracking-[0.3em] text-black transition-all hover:brightness-110 active:scale-95 shadow-2xl shadow-yellow-500/10"
+                className="inline-flex items-center justify-center rounded-lg bg-azzurri-blue px-14 py-4 text-xs font-bold uppercase tracking-[0.3em] text-black transition-all hover:brightness-110 active:scale-95 shadow-2xl shadow-blue-500/10"
               >
                 {content.hero.primaryCtaLabel}
               </a>
@@ -119,20 +119,20 @@ export default async function Home() {
               <div className="mb-6 flex justify-center">
                 <span className="inline-flex items-center gap-2 rounded-full border border-[#EFD077]/30 bg-[#EFD077]/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#EFD077]">
                   <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#EFD077] opacity-75"></span>
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#EFD077]"></span>
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-azzurri-blue opacity-75"></span>
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-azzurri-blue"></span>
                   </span>
                   Upcoming Highlight
                 </span>
               </div>
             )}
-            <h2 className="heading-font text-5xl font-medium tracking-tight text-[#EFD077] md:text-6xl">
+            <h2 className="heading-font text-5xl font-medium tracking-tight text-azzurri-blue md:text-6xl">
               {content.events.title}
             </h2>
             <p className="mt-4 text-[12px] uppercase tracking-[0.4em] text-zinc-400">
               {content.events.description}
             </p>
-            <div className="h-0.5 w-12 bg-[#EFD077] mx-auto mt-8" />
+            <div className="h-0.5 w-12 bg-azzurri-blue mx-auto mt-8" />
           </FadeIn>
 
           <div className="mt-10 grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
@@ -149,16 +149,16 @@ export default async function Home() {
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   </div>
                   <div className="flex flex-1 flex-col px-6 pb-10 pt-8">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4AF37]">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-azzurri-blue">
                       {event.date}
                     </p>
-                    <h3 className="mt-4 text-2xl font-medium tracking-tight text-white group-hover:text-[#EFD077] transition-colors">
+                    <h3 className="mt-4 text-2xl font-medium tracking-tight text-white group-hover:text-azzurri-blue transition-colors">
                       {event.title}
                     </h3>
                     <p className="mt-4 text-sm leading-relaxed text-zinc-400 font-light lg:text-base">{event.description}</p>
                     <Link
                       href={event.href}
-                      className="mt-10 inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-[#EFD077] to-[#D4AF37] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-black shadow-xl shadow-yellow-500/10 hover:brightness-110 active:scale-95 transition-all"
+                      className="mt-10 inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-azzurri-blue to-[#137d91] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-black shadow-xl shadow-blue-500/10 hover:brightness-110 active:scale-95 transition-all"
                       aria-label={`Learn more about ${event.title}`}
                     >
                       Learn More
@@ -186,7 +186,7 @@ export default async function Home() {
           <FadeIn delay={120} className="w-full lg:w-1/2">
             <div className="space-y-12">
               <div className="space-y-4">
-                <div className="h-0.5 w-16 bg-[#EFD077]" />
+                <div className="h-0.5 w-16 bg-azzurri-blue" />
               </div>
 
               <div className="space-y-10">
@@ -199,11 +199,11 @@ export default async function Home() {
 
               <div className="flex gap-16 pt-10 border-t border-white/10">
                 <div>
-                  <p className="heading-font text-5xl font-semibold text-[#EFD077]">25+</p>
+                  <p className="heading-font text-5xl font-semibold text-azzurri-blue">25+</p>
                   <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-400 mt-2 font-bold">Years of Excellence</p>
                 </div>
                 <div>
-                  <p className="heading-font text-5xl font-semibold text-[#EFD077]">100+</p>
+                  <p className="heading-font text-5xl font-semibold text-azzurri-blue">100+</p>
                   <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-500 mt-2 font-bold">Signature Dishes</p>
                 </div>
               </div>
@@ -227,10 +227,10 @@ export default async function Home() {
           <FadeIn delay={120} className="w-full lg:w-1/2">
             <div className="space-y-10">
               <div className="space-y-4">
-                <h2 className="heading-font text-5xl font-medium tracking-tight text-[#EFD077] md:text-7xl">
+                <h2 className="heading-font text-5xl font-medium tracking-tight text-azzurri-blue md:text-7xl">
                   {content.excellence.title}
                 </h2>
-                <div className="h-0.5 w-16 bg-[#EFD077]" />
+                <div className="h-0.5 w-16 bg-azzurri-blue" />
               </div>
 
               <div className="space-y-8 text-base leading-relaxed text-zinc-400 font-light lg:text-lg">
@@ -244,8 +244,8 @@ export default async function Home() {
 
               <div className="flex gap-16 pt-8">
                 {content.excellence.stats.map((stat, i) => (
-                  <div key={i} className="border-l-2 border-[#EFD077] pl-8 py-1">
-                    <p className="heading-font text-5xl font-semibold text-[#EFD077]">{stat.value}</p>
+                  <div key={i} className="border-l-2 border-azzurri-blue pl-8 py-1">
+                    <p className="heading-font text-5xl font-semibold text-azzurri-blue">{stat.value}</p>
                     <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-400 mt-2 font-bold">{stat.label}</p>
                   </div>
                 ))}
@@ -258,10 +258,10 @@ export default async function Home() {
       <section className="py-12 lg:py-16">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <FadeIn>
-            <h2 className="heading-font text-[10px] uppercase tracking-[0.4em] text-[#D4AF37]">
+            <h2 className="heading-font text-[10px] uppercase tracking-[0.4em] text-azzurri-blue">
               {content.descriptionSection.heading}
             </h2>
-            <div className="h-0.5 w-12 bg-[#EFD077] mx-auto mt-6" />
+            <div className="h-0.5 w-12 bg-azzurri-blue mx-auto mt-6" />
             <div className="mt-10 space-y-6">
               {content.descriptionSection.paragraphs.map((p, i) => (
                 <p key={i} className="text-lg leading-relaxed text-zinc-300 font-light">
@@ -276,7 +276,7 @@ export default async function Home() {
       <section className="pt-0 pb-16">
         <div className="mx-auto max-w-6xl px-4">
           <FadeIn className="mb-14 text-center">
-            <h2 className="heading-font text-4xl font-medium tracking-tight text-[#EFD077]">
+            <h2 className="heading-font text-4xl font-medium tracking-tight text-azzurri-blue">
               {content.testimonials.title}
             </h2>
             <p className="mt-4 text-[10px] uppercase tracking-[0.3em] text-zinc-400">
@@ -296,13 +296,13 @@ export default async function Home() {
       <section className="bg-black py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <FadeIn className="text-center mb-12">
-            <h2 className="heading-font text-5xl font-medium tracking-tight text-[#EFD077] md:text-6xl">
+            <h2 className="heading-font text-5xl font-medium tracking-tight text-azzurri-blue md:text-6xl">
               Gallery
             </h2>
             <p className="mt-4 text-[12px] uppercase tracking-[0.4em] text-zinc-400">
               Visualizing the Azzurri Experience
             </p>
-            <div className="h-0.5 w-12 bg-[#EFD077] mx-auto mt-8" />
+            <div className="h-0.5 w-12 bg-azzurri-blue mx-auto mt-8" />
           </FadeIn>
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
@@ -319,7 +319,7 @@ export default async function Home() {
                   <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
                     <Link
                       href="/gallery"
-                      className="h-10 w-10 rounded-full bg-[#EFD077] flex items-center justify-center text-black"
+                      className="h-10 w-10 rounded-full bg-azzurri-blue flex items-center justify-center text-black"
                     >
                       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -334,7 +334,7 @@ export default async function Home() {
           <FadeIn className="mt-12 text-center">
             <Link
               href="/gallery"
-              className="inline-flex items-center justify-center rounded-lg border border-[#EFD077] px-12 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#EFD077] transition-all hover:bg-[#EFD077] hover:text-black active:scale-95"
+              className="inline-flex items-center justify-center rounded-lg border border-azzurri-blue px-12 py-4 text-xs font-bold uppercase tracking-[0.2em] text-azzurri-blue transition-all hover:bg-azzurri-blue hover:text-black active:scale-95"
             >
               View Full Gallery
             </Link>
@@ -347,7 +347,7 @@ export default async function Home() {
           <div className="grid gap-20 lg:grid-cols-2 lg:items-start">
             <FadeIn className="space-y-12">
               <div className="space-y-6">
-                <h2 className="heading-font text-6xl font-medium tracking-tight text-[#EFD077]">
+                <h2 className="heading-font text-6xl font-medium tracking-tight text-azzurri-blue">
                   {content.contact.title}
                 </h2>
                 <p className="text-zinc-400 text-[15px] max-w-md leading-relaxed">
@@ -385,7 +385,7 @@ export default async function Home() {
                 href="https://maps.google.com/?q=Azzurri+Kigali+Kimihurura"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-lg bg-[#FDE68A] px-14 py-4 text-xs font-bold uppercase tracking-[0.3em] text-black transition-all hover:scale-105 active:scale-95"
+                className="inline-flex items-center justify-center rounded-lg bg-azzurri-blue px-14 py-4 text-xs font-bold uppercase tracking-[0.3em] text-black transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-blue-500/10"
               >
                 GET DIRECTION
               </a>

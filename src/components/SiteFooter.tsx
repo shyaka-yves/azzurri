@@ -18,22 +18,22 @@ export function SiteFooter() {
             <p className="text-sm font-semibold text-[#D4AF37]">Quick Links</p>
             <ul className="mt-3 space-y-2 text-sm text-zinc-300">
               <li>
-                <Link href="/" className="hover:text-[#D4AF37]">
+                <Link href="/" className="hover:text-azzurri-blue">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/menu" className="hover:text-[#D4AF37]">
+                <Link href="/menu" className="hover:text-azzurri-blue">
                   Menus
                 </Link>
               </li>
               <li>
-                <Link href="/gallery" className="hover:text-[#D4AF37]">
+                <Link href="/gallery" className="hover:text-azzurri-blue">
                   Gallery
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-[#D4AF37]">
+                <Link href="/contact" className="hover:text-azzurri-blue">
                   Contact
                 </Link>
               </li>
@@ -47,7 +47,7 @@ export function SiteFooter() {
                 href="https://www.instagram.com/lacreola_kigali?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex py-2 hover:text-[#D4AF37] transition-colors"
+                className="inline-flex py-2 hover:text-azzurri-blue transition-colors"
                 aria-label="Follow us on Instagram"
               >
                 Instagram
