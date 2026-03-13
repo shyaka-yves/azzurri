@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1771491327309-q6931yndtxj",
+    "username": "admin",
+    "passwordHash": "$2b$10$.1uUzp/H5Lr/LqtioWKEaepMpCBs1Xw6ayaYJ/i9AW.v6TvNMXk3K",
+    "createdAt": "2026-02-19T08:55:27.309Z",
+    "lastLogin": "2026-02-20T17:27:01.889Z"
+  },
+  {
+    "id": "1771492000000-shyaka-admin",
+    "username": "Shyaka",
+    "passwordHash": "$2b$10$1aYTWzGIGvlAgZxZHpbNAeiHI8lbuZho.cVvjbxrDolQHlX0u.0s.",
+    "createdAt": "2026-02-17T00:00:00.000Z",
+    "lastLogin": "2026-02-20T17:33:53.734Z"
+  }
+]

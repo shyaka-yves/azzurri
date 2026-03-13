@@ -1,0 +1,164 @@
+{
+  "hero": {
+    "brand": "Azzurri",
+    "tagline": "Kigali · Rooftop Restaurant, Club & Lounge",
+    "headline": "Azzurri",
+    "subheadline": "An exquisite culinary sanctuary blending African and Asian inspirations in the heart of Kigali.",
+    "primaryCtaLabel": "Explore",
+    "primaryCtaHref": "/about",
+    "secondaryCtaLabel": "View Menu",
+    "secondaryCtaHref": "/menu",
+    "mediaType": "video",
+    "mediaSrc": "/uploads/pop.mp4",
+    "overlay": "from-black/80 via-black/85 to-black/95"
+  },
+  "about": {
+    "eyebrow": "About Azzurri",
+    "title": "Azzurri is a vibrant dining destination",
+    "paragraphs": [
+      "We curate a sensory experience that celebrates the rhythm of Kigali nights. Our menu is an intimate dialogue between bold African flavors and delicate Asian craftsmanship, plated with meticulous artistry and served in a space designed for lingering.",
+      "From candlelit dinners to private celebrations, Azzurri is where refined hospitality, crafted cocktails, and a soulful soundtrack meet under a softly lit ceiling."
+    ],
+    "imageSrc": "/uploads/FRIDAYYY.png",
+    "ctaLabel": "Book a Table",
+    "ctaHref": "/contact"
+  },
+  "excellence": {
+    "eyebrow": "The Standard",
+    "title": "Azzurri Excellence",
+    "description": "Our chefs compose each plate as a story of provenance and precision. Seasonal ingredients, curated wines, and bespoke pairings converge in a dining experience where every detail—from glassware to garnish—is intentionally designed.",
+    "stats": [
+      {
+        "value": "3+",
+        "label": "Years Experience"
+      },
+      {
+        "value": "5.0",
+        "label": "Client Rating"
+      }
+    ],
+    "imageSrc": "/uploads/FRIDAYYY.png"
+  },
+  "menuIntro": {
+    "eyebrow": "Tasting Notes",
+    "title": "A fusion of African soul & Asian finesse",
+    "description": "From delicate sashimi with Rwandan citrus to slow-braised cuts infused with aromatic spices, our menu is designed for sharing."
+  },
+  "events": {
+    "eyebrow": "Evenings at Azzurri",
+    "title": "Upcoming Party Events",
+    "description": "Experience unforgettable nights with curated DJs, live performances, and tasting menus crafted for celebration.",
+    "items": [
+      {
+        "date": "FRI · SIGNATURE NIGHTS",
+        "title": "Neo-Soul & Jazz Supper Club",
+        "description": "A live quartet, candlelit tables, and a four-course chef’s menu paired with curated wines.",
+        "imageSrc": "/uploads/event-1.jpg"
+      },
+      {
+        "date": "SAT · MIDNIGHT SESSIONS",
+        "title": "Afro-Asian Rhythm Lounge",
+        "description": "Resident DJs blend Afro-house, amapiano, and downtempo beats with crafted cocktails till late.",
+        "imageSrc": "/uploads/event-2.jpg"
+      },
+      {
+        "date": "MONTHLY · LIMITED SEATS",
+        "title": "Chef’s Table: Tasting Journey",
+        "description": "An intimate 10-course tasting menu featuring seasonal creations and stories from the kitchen.",
+        "imageSrc": "/uploads/event-3.jpg"
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "Inside Azzurri",
+    "title": "Gallery",
+    "items": [
+      {
+        "imageSrc": "/uploads/FRIDAYYY.png",
+        "alt": "Interior ambience"
+      },
+      {
+        "imageSrc": "/uploads/FRIDAYYY.png",
+        "alt": "Signature dish"
+      },
+      {
+        "imageSrc": "/uploads/FRIDAYYY.png",
+        "alt": "Bar experience"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Voices of our guests",
+    "title": "Testimonials",
+    "subtitle": "Stories from evenings that turned into cherished memories.",
+    "items": [
+      {
+        "quote": "Every detail at Azzurri feels intentional—from the playlists to the plating. Kigali needed a space like this.",
+        "name": "Imanzi N.",
+        "rating": 5
+      },
+      {
+        "quote": "A beautiful balance of comfort and sophistication. The tasting menu was a journey through flavors I didn’t know I loved.",
+        "name": "Rachel K.",
+        "rating": 5
+      },
+      {
+        "quote": "Cocktails that would impress any global bar, in a setting that still feels intimately Rwandan.",
+        "name": "David M.",
+        "rating": 5
+      }
+    ]
+  },
+  "blog": {
+    "eyebrow": "From Our Blog",
+    "title": "Stories from the kitchen & bar",
+    "items": [
+      {
+        "category": "Chef's Notes",
+        "title": "Designing a Menu that Moves with the Seasons",
+        "excerpt": "How our culinary team balances Kigali’s local markets with Asian pantry staples to create a menu that always feels alive.",
+        "imageSrc": "/uploads/blog-1.jpg"
+      },
+      {
+        "category": "Behind the Bar",
+        "title": "The Art of Gold-Touched Cocktails",
+        "excerpt": "Step inside our bar program and discover how we layer aromatics, textures, and visual details into every pour.",
+        "imageSrc": "/uploads/blog-2.jpg"
+      },
+      {
+        "category": "Culture & Space",
+        "title": "Crafting the Soundtrack of an Evening",
+        "excerpt": "From jazz to amapiano, how we curate the music that shapes the mood of your night at Azzurri.",
+        "imageSrc": "/uploads/blog-3.jpg"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Visit Us",
+    "addressLines": [
+      "Kigali/ Kimihurura",
+      "KG 28 Avenue, Kigali closer Adventist Church"
+    ],
+    "addressNote": "Located in the heart of Kimihurura with breathtaking views of the hills of Kigali.",
+    "hoursLines": [
+      "Tuesday - Thursday: 6:00 PM - 12:00 AM",
+      "Friday - Saturday: 6:00 PM - 2:00 AM",
+      "Sunday: 6:00 PM - 11:00 PM",
+      "Monday: Closed"
+    ],
+    "email": "reservations@azzurri.com",
+    "phone": "+250 793 084 995",
+    "mapEmbedSrc": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d390.110208989431!2d30.085970473208192!3d-1.9614453068728352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca777ef43544b%3A0xb1c95bbfefb7ff00!2sLa%20Creola!5e0!3m2!1sen!2srw!4v1771455504152!5m2!1sen!2srw"
+  },
+  "menu": {
+    "pdfUrl": "/uploads/1771609558835-133283f733df4bb1e0cd.pdf"
+  },
+  "specialty": {
+    "title": "Speciality",
+    "content": ""
+  },
+  "specialOffers": {
+    "title": "Special offers",
+    "content": ""
+  }
+}
