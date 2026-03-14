@@ -11,6 +11,7 @@ export type ReservationRecord = {
   notes?: string;
   status: "new" | "contacted" | "closed";
   zone?: "restaurant" | "club";
+  tableType?: string;
 };
 
 const mapRow = (r: {
@@ -24,6 +25,7 @@ const mapRow = (r: {
   notes: string | null;
   status: string;
   zone: string | null;
+  table_type: string | null;
 }): ReservationRecord => ({
   id: r.id,
   createdAt: r.created_at,
@@ -35,6 +37,7 @@ const mapRow = (r: {
   notes: r.notes ?? undefined,
   status: r.status as ReservationRecord["status"],
   zone: (r.zone as "restaurant" | "club") ?? undefined,
+  tableType: r.table_type ?? undefined,
 });
 
 export async function listReservations(): Promise<ReservationRecord[]> {
@@ -57,6 +60,7 @@ export async function addReservation(record: Omit<ReservationRecord, "id" | "cre
       notes: record.notes ?? null,
       status: record.status ?? "new",
       zone: record.zone ?? null,
+      table_type: record.tableType ?? null,
     })
     .select()
     .single();

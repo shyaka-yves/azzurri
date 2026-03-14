@@ -22,6 +22,7 @@ async function sendReservationEmail(record: ReservationRecord) {
     record.phone ? `Phone: ${record.phone}` : null,
     record.date ? `Date & Time: ${record.date}` : null,
     record.guests ? `Guests: ${record.guests}` : null,
+    record.tableType ? `Table Area: ${record.tableType}` : null,
     record.notes ? `Notes:\n${record.notes}` : null,
   ].filter(Boolean);
 
@@ -43,6 +44,7 @@ export async function POST(req: Request) {
       guests?: number;
       notes?: string;
       zone?: string;
+      tableType?: string;
     }
     | null;
 
@@ -54,6 +56,7 @@ export async function POST(req: Request) {
   const notes = (body?.notes ?? "").trim();
   const zoneRaw = (body?.zone ?? "").trim().toLowerCase();
   const zone = (zoneRaw === "restaurant" || zoneRaw === "club") ? zoneRaw : undefined;
+  const tableType = (body?.tableType ?? "").trim();
 
   if (!name || !email) {
     return NextResponse.json(
@@ -99,6 +102,7 @@ export async function POST(req: Request) {
     notes: notes || undefined,
     status: "new",
     zone,
+    tableType: tableType || undefined,
   });
 
   try {

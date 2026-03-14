@@ -50,7 +50,7 @@ export default async function Home() {
   return (
     <div className="relative overflow-hidden bg-black">
       {/* Hero */}
-      <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden lg:min-h-[90vh]">
+      <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden lg:min-h-screen">
         <div className="absolute inset-0 z-0">
           {content.hero.mediaType === "video" && content.hero.mediaSrc && content.hero.mediaSrc.match(/\.(mp4|webm|ogg|mov)(\?.*)?$/i) ? (
             <video
@@ -75,13 +75,13 @@ export default async function Home() {
 
         <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-4 text-center">
           <FadeIn>
-            <div className="mb-10 lg:mb-14">
+            <div className="mb-6 lg:mb-8">
               <Image
                 src="/logo.png"
                 alt={content.hero.brand}
                 width={600}
                 height={200}
-                className="h-auto w-48 md:w-64 lg:w-[350px]"
+                className="h-auto w-48 md:w-64 lg:w-[320px]"
                 priority
               />
             </div>

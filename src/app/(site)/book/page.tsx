@@ -3,6 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import { useMemo, useState, useEffect, Suspense } from 'react';
 import { ZoneSelector } from '@/components/ZoneSelector';
+import { FadeIn } from '@/components/FadeIn';
 
 function getMinDateTimeValue(): string {
   const now = new Date();
@@ -45,6 +46,7 @@ function BookingContent() {
   const [dateTime, setDateTime] = useState('');
   const [guests, setGuests] = useState('');
   const [notes, setNotes] = useState('');
+  const [tableType, setTableType] = useState<string>('');
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -82,6 +84,7 @@ function BookingContent() {
           guests: guests ? Number(guests) : undefined,
           notes,
           zone,
+          tableType: zone === 'club' ? tableType : undefined,
         }),
       });
 
@@ -101,6 +104,7 @@ function BookingContent() {
       setDateTime('');
       setGuests('');
       setNotes('');
+      setTableType('');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     } finally {
@@ -124,6 +128,54 @@ function BookingContent() {
         </div>
 
         <ZoneSelector onZoneChange={setZone} />
+
+        {zone === 'club' && (
+          <FadeIn className="mb-8">
+            <div className="card-glass overflow-hidden rounded-3xl border border-zinc-800 bg-black/60 p-6 shadow-xl">
+              <h2 className="heading-font mb-4 text-xl font-semibold text-[#D4AF37]">
+                Club Seat Selection
+              </h2>
+              <p className="mb-6 text-xs text-zinc-400 uppercase tracking-widest">
+                Please select your preferred area (Minimum spend applies)
+              </p>
+              
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { id: 'cigar', label: 'Cigar Lounge', pax: '15 pax', minSpend: '2,500,000 RWF' },
+                  { id: 'top-vvip', label: 'Top VVIP', pax: '6-8 pax', minSpend: '1,500,000 RWF' },
+                  { id: 'vvip', label: 'VVIP', pax: '10-12 pax', minSpend: '1,000,000 RWF' },
+                  { id: 'vip', label: 'VIP', pax: '5-10 pax', minSpend: '800,000 RWF' },
+                ].map((t) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    onClick={() => setTableType(t.label)}
+                    className={`flex flex-col items-center justify-center gap-2 rounded-2xl border p-6 transition-all ${
+                      tableType === t.label
+                        ? 'border-azzurri-blue bg-azzurri-blue/10'
+                        : 'border-zinc-800 bg-black/40 hover:border-zinc-700'
+                    }`}
+                  >
+                    <span className={`text-sm font-bold ${tableType === t.label ? 'text-white' : 'text-zinc-300'}`}>
+                      {t.label}
+                    </span>
+                    <span className="text-[10px] text-zinc-500">{t.pax}</span>
+                    <div className="mt-2 h-px w-8 bg-zinc-800" />
+                    <span className="mt-1 text-[11px] font-medium text-[#D4AF37]">
+                      {t.minSpend}
+                    </span>
+                  </button>
+                ))}
+              </div>
+              
+              {tableType && (
+                <p className="mt-6 text-center text-xs text-zinc-400">
+                  You have selected <span className="text-white font-semibold">{tableType}</span>.
+                </p>
+              )}
+            </div>
+          </FadeIn>
+        )}
 
         <form
           onSubmit={handleSubmit}
