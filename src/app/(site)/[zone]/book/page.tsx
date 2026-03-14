@@ -12,8 +12,10 @@ function getMinDateTimeValue(): string {
   return iso.slice(0, 16); // yyyy-MM-ddTHH:mm
 }
 
-export default function BookPage() {
+export default function BookPage({ params }: { params: { zone: string } }) {
   const minDateTime = useMemo(getMinDateTimeValue, []);
+  
+  const zone = params?.zone || 'restaurant';
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -57,6 +59,7 @@ export default function BookPage() {
           date: dateTime,
           guests: guests ? Number(guests) : undefined,
           notes,
+          zone,
         }),
       });
 

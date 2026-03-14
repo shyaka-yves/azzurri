@@ -42,6 +42,7 @@ export async function POST(req: Request) {
       date?: string;
       guests?: number;
       notes?: string;
+      zone?: string;
     }
     | null;
 
@@ -51,6 +52,8 @@ export async function POST(req: Request) {
   const date = (body?.date ?? "").trim();
   const guests = Number(body?.guests ?? NaN);
   const notes = (body?.notes ?? "").trim();
+  const zoneRaw = (body?.zone ?? "").trim().toLowerCase();
+  const zone = (zoneRaw === "restaurant" || zoneRaw === "club") ? zoneRaw : undefined;
 
   if (!name || !email) {
     return NextResponse.json(
@@ -95,6 +98,7 @@ export async function POST(req: Request) {
     guests: Number.isFinite(guests) && guests > 0 ? guests : undefined,
     notes: notes || undefined,
     status: "new",
+    zone,
   });
 
   try {

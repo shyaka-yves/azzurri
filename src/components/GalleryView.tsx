@@ -4,22 +4,22 @@ import { useState } from "react";
 import Image from "next/image";
 import { FadeIn } from "@/components/FadeIn";
 import { GallerySlideshow } from "@/components/GallerySlideshow";
-import { ZoneSelector } from "@/components/ZoneSelector";
 
 type ImageItem = { id: string; src: string; label: string };
 
 export function GalleryView({
     content,
-    galleryImages
+    galleryImages,
+    zone = 'restaurant'
 }: {
     content: any;
     galleryImages: any[];
+    zone?: 'restaurant' | 'club';
 }) {
     const [slideshow, setSlideshow] = useState<{ isOpen: boolean; index: number }>({
         isOpen: false,
         index: 0
     });
-    const [activeZone, setActiveZone] = useState<'restaurant' | 'club'>('restaurant');
 
     const images: ImageItem[] = galleryImages.length > 0
         ? galleryImages.map(img => ({ id: img.id, src: img.imageUrl, label: img.label }))
@@ -40,8 +40,6 @@ export function GalleryView({
 
             <section className="bg-black/95 pb-24">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6">
-                    <ZoneSelector activeZone={activeZone} onZoneChange={setActiveZone} />
-                    
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mt-8">
                         {images.map((img, idx) => (
                             <FadeIn key={img.id} delay={idx * 30}>

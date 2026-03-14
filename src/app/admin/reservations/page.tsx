@@ -12,6 +12,7 @@ type Reservation = {
   guests?: number;
   notes?: string;
   status: "new" | "contacted" | "closed";
+  zone?: "restaurant" | "club";
 };
 
 export default function AdminReservationsPage() {
@@ -61,11 +62,12 @@ export default function AdminReservationsPage() {
   function downloadCSV() {
     if (filtered.length === 0) return;
 
-    const headers = ["Name", "Email", "Phone", "Date", "Guests", "Status", "Created At", "Notes"];
+    const headers = ["Name", "Email", "Phone", "Zone", "Date", "Guests", "Status", "Created At", "Notes"];
     const rows = filtered.map(r => [
       r.name,
       r.email,
       r.phone || "",
+      r.zone || "restaurant",
       r.date || "",
       r.guests?.toString() || "",
       r.status,
@@ -174,7 +176,8 @@ export default function AdminReservationsPage() {
               <thead className="bg-zinc-900/80 text-[11px] uppercase tracking-[0.18em] text-zinc-500">
                 <tr>
                   <th className="px-4 py-3">Name</th>
-                  <th className="px-4 py-3">Email / Phone</th>
+                  <th className="px-4 py-3">Contact</th>
+                  <th className="px-4 py-3">Zone</th>
                   <th className="px-4 py-3">Date</th>
                   <th className="px-4 py-3">Guests</th>
                   <th className="px-4 py-3">Status</th>
@@ -209,6 +212,11 @@ export default function AdminReservationsPage() {
                             {r.phone}
                           </div>
                         ) : null}
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className="inline-flex rounded-md bg-zinc-800/50 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-300">
+                          {r.zone || "Restaurant"}
+                        </span>
                       </td>
                       <td className="px-4 py-3 text-xs">{r.date || "—"}</td>
                       <td className="px-4 py-3 text-xs">

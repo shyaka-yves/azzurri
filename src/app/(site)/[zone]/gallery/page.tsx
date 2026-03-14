@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function GalleryPage() {
+export default async function GalleryPage({ params }: { params: { zone: string } }) {
   const [content, galleryImages] = await Promise.all([getSiteContent(), listGalleryImages()]);
 
-  return <GalleryView content={content} galleryImages={galleryImages} />;
+  return <GalleryView content={content} galleryImages={galleryImages} zone={params.zone as 'restaurant' | 'club'} />;
 }

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
 const RESTAURANT_DROPDOWN = [
-  { href: "/menu", label: "Menu" },
+  { href: "/select?dest=menu", label: "Menu" },
   { href: "/special-offers", label: "Special offers" },
   { href: "/speciality", label: "Speciality" },
 
@@ -15,7 +15,7 @@ const NAV_ITEMS = [
   { href: "/", label: "HOME" },
   { href: "/about", label: "ABOUT US" },
   { href: "/events", label: "EVENTS" },
-  { href: "/gallery", label: "GALLERY" },
+  { href: "/select?dest=gallery", label: "GALLERY" },
   { href: "/contact", label: "CONTACT" },
 ];
 
@@ -92,13 +92,13 @@ export function Navbar() {
           </div>
 
           <Link href="/events" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">EVENTS</Link>
-          <Link href="/gallery" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">GALLERY</Link>
+          <Link href="/select?dest=gallery" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">GALLERY</Link>
           <Link href="/contact" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">CONTACT</Link>
         </nav>
 
         <div className="flex items-center gap-3">
           <a
-            href="/book"
+            href="/select?dest=book"
             className="hidden border border-azzurri-blue bg-transparent px-8 py-3 text-[11px] uppercase tracking-[0.2em] text-azzurri-blue transition-all hover:bg-azzurri-blue hover:text-black lg:inline-flex"
           >
             BOOK A TABLE
@@ -143,10 +143,10 @@ export function Navbar() {
           </div>
 
           <Link href="/events" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">EVENTS</Link>
-          <Link href="/gallery" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">GALLERY</Link>
+          <Link href="/select?dest=gallery" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">GALLERY</Link>
           <Link href="/contact" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">CONTACT</Link>
 
-          <a href="/book" onClick={() => setMobileOpen(false)} className="mt-4 flex items-center justify-center border border-azzurri-blue bg-transparent py-3 text-sm uppercase tracking-widest text-white">
+          <a href="/select?dest=book" onClick={() => setMobileOpen(false)} className="mt-4 flex items-center justify-center border border-azzurri-blue bg-transparent py-3 text-sm uppercase tracking-widest text-white">
             BOOK A TABLE
           </a>
         </nav>

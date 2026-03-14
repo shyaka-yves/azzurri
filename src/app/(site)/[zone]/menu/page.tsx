@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function MenuPage() {
+export default async function MenuPage({ params }: { params: { zone: string } }) {
   const content = await getSiteContent();
 
-  return <MenuView content={content} />;
+  return <MenuView content={content} zone={params.zone as 'restaurant' | 'club'} />;
 }
 

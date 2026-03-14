@@ -2,17 +2,15 @@
 
 import { useState } from "react";
 import { FadeIn } from "@/components/FadeIn";
-import { ZoneSelector } from "@/components/ZoneSelector";
 import type { SiteContent } from "@/lib/siteContent";
 
 interface MenuViewProps {
   content: SiteContent;
+  zone?: 'restaurant' | 'club';
 }
 
-export function MenuView({ content }: MenuViewProps) {
-  const [activeZone, setActiveZone] = useState<'restaurant' | 'club'>('restaurant');
-
-  const activePdf = activeZone === 'restaurant' 
+export function MenuView({ content, zone = 'restaurant' }: MenuViewProps) {
+  const activePdf = zone === 'restaurant' 
     ? content.menu.restaurantPdfUrl 
     : content.menu.clubPdfUrl;
 
@@ -32,16 +30,14 @@ export function MenuView({ content }: MenuViewProps) {
 
       <section className="pb-16 sm:pb-24 bg-black/90">
         <div className="mx-auto max-w-5xl px-4">
-          <ZoneSelector activeZone={activeZone} onZoneChange={setActiveZone} />
-
           {activePdf ? (
-            <FadeIn key={activeZone}>
+            <FadeIn key={zone}>
               <div className="rounded-2xl border border-zinc-700/70 bg-zinc-800/20 p-2 sm:p-4 md:p-6 backdrop-blur-sm">
                 <div className="relative mx-auto w-full overflow-hidden rounded-lg border border-zinc-600/30 bg-white shadow-2xl">
                   <iframe
                     src={`${activePdf}#view=Fit`}
                     className="h-[50vh] min-h-[500px] w-full rounded-lg md:h-[80vh] md:min-h-[600px]"
-                    title={`${activeZone} Menu PDF`}
+                    title={`${zone} Menu PDF`}
                   />
                 </div>
                 <div className="mt-8 flex justify-center">
@@ -51,16 +47,16 @@ export function MenuView({ content }: MenuViewProps) {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full bg-azzurri-blue px-8 py-3 text-xs font-bold uppercase tracking-wider text-black transition-transform hover:scale-105 active:scale-95 shadow-xl shadow-blue-500/20"
                   >
-                    Download {activeZone === 'restaurant' ? 'Restaurant' : 'Club'} Menu (PDF)
+                    Download {zone === 'restaurant' ? 'Restaurant' : 'Club'} Menu (PDF)
                   </a>
                 </div>
               </div>
             </FadeIn>
           ) : (
-            <FadeIn key={activeZone + '-empty'}>
+            <FadeIn key={zone + '-empty'}>
               <div className="rounded-2xl border border-zinc-800/50 bg-zinc-900/30 p-16 text-center backdrop-blur-sm">
                 <p className="text-zinc-500 italic">
-                  The {activeZone === 'restaurant' ? 'Rooftop Restaurant' : 'Club & Lounge'} menu will be available soon.
+                  The {zone === 'restaurant' ? 'Rooftop Restaurant' : 'Club & Lounge'} menu will be available soon.
                 </p>
               </div>
             </FadeIn>
