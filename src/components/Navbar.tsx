@@ -5,25 +5,25 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
 const RESTAURANT_DROPDOWN = [
-  { href: "/select?dest=menu", label: "Menu" },
+  { href: "/menu?zone=restaurant", label: "Restaurant Menu" },
   { href: "/special-offers", label: "Special offers" },
   { href: "/speciality", label: "Speciality" },
-
 ];
 
-const NAV_ITEMS = [
-  { href: "/", label: "HOME" },
-  { href: "/about", label: "ABOUT US" },
-  { href: "/events", label: "EVENTS" },
-  { href: "/select?dest=gallery", label: "GALLERY" },
-  { href: "/contact", label: "CONTACT" },
+const CLUB_DROPDOWN = [
+  { href: "/menu?zone=club", label: "Club Menu" },
+  { href: "/select?dest=vip", label: "VIP Bookings" }, // Optional, can adjust later
 ];
+
+
 
 export function Navbar() {
   const [logoError, setLogoError] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [restaurantOpen, setRestaurantOpen] = useState(false);
+  const [clubOpen, setClubOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const clubDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (mobileOpen) document.body.style.overflow = "hidden";
@@ -35,6 +35,9 @@ export function Navbar() {
     function handleClickOutside(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setRestaurantOpen(false);
+      }
+      if (clubDropdownRef.current && !clubDropdownRef.current.contains(e.target as Node)) {
+        setClubOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -91,14 +94,46 @@ export function Navbar() {
             )}
           </div>
 
+          <div className="relative" ref={clubDropdownRef}>
+            <button
+              type="button"
+              onClick={() => setClubOpen((o) => !o)}
+              className="flex items-center gap-1 transition-colors hover:text-azzurri-blue"
+              aria-expanded={clubOpen}
+              aria-haspopup="true"
+            >
+              CLUB
+            </button>
+            {clubOpen && (
+              <div className="absolute left-1/2 top-full z-50 mt-1 min-w-[180px] -translate-x-1/2 rounded border border-zinc-700 bg-black py-2 shadow-xl">
+                {CLUB_DROPDOWN.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="block px-4 py-2 text-left text-sm capitalize text-white hover:bg-zinc-800 hover:text-azzurri-blue"
+                    onClick={() => setClubOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           <Link href="/events" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">EVENTS</Link>
-          <Link href="/select?dest=gallery" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">GALLERY</Link>
+          <div className="relative group">
+             <Link href="/gallery" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">GALLERY</Link>
+             <div className="absolute left-1/2 top-full z-50 mt-1 hidden min-w-[180px] -translate-x-1/2 rounded border border-zinc-700 bg-black py-2 shadow-xl group-hover:block">
+                <Link href="/gallery?zone=restaurant" className="block px-4 py-2 text-left text-sm capitalize text-white hover:bg-zinc-800 hover:text-azzurri-blue">Restaurant Gallery</Link>
+                <Link href="/gallery?zone=club" className="block px-4 py-2 text-left text-sm capitalize text-white hover:bg-zinc-800 hover:text-azzurri-blue">Club Gallery</Link>
+             </div>
+          </div>
           <Link href="/contact" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">CONTACT</Link>
         </nav>
 
         <div className="flex items-center gap-3">
           <a
-            href="/select?dest=book"
+            href="/book"
             className="hidden border border-azzurri-blue bg-transparent px-8 py-3 text-[11px] uppercase tracking-[0.2em] text-azzurri-blue transition-all hover:bg-azzurri-blue hover:text-black lg:inline-flex"
           >
             BOOK A TABLE
@@ -128,27 +163,35 @@ export function Navbar() {
         style={{ height: mobileOpen ? "calc(100vh - 52px)" : 0 }}
       >
         <nav className="flex flex-col px-4 py-6">
-          <Link href="/" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-[#D4AF37]">HOME</Link>
-          <Link href="/about" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-[#D4AF37]">ABOUT US</Link>
           <Link href="/" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">HOME</Link>
           <Link href="/about" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">ABOUT US</Link>
 
           <div className="border-b border-zinc-800 py-2">
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-zinc-400">
-              A premium dining destination in Kigali where bold African flavors meet Asian craftsmanship in a luxurious rooftop setting.
-            </p>
+            <div className="mt-4 border-t border-zinc-800/50 pt-2 text-xs font-semibold text-zinc-500 uppercase tracking-widest pl-4">Restaurant</div>
             {RESTAURANT_DROPDOWN.map((item) => (
+              <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="block py-2 pl-4 text-sm capitalize text-white transition-colors hover:text-azzurri-blue">{item.label}</Link>
+            ))}
+            <div className="mt-4 border-t border-zinc-800/50 pt-2 text-xs font-semibold text-zinc-500 uppercase tracking-widest pl-4">Club</div>
+            {CLUB_DROPDOWN.map((item) => (
               <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} className="block py-2 pl-4 text-sm capitalize text-white transition-colors hover:text-azzurri-blue">{item.label}</Link>
             ))}
           </div>
 
           <Link href="/events" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">EVENTS</Link>
-          <Link href="/select?dest=gallery" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">GALLERY</Link>
+          
+          <div className="border-b border-zinc-800 py-4">
+            <span className="text-sm uppercase tracking-wide text-white">GALLERY</span>
+            <div className="mt-2 pl-4 flex flex-col gap-2">
+               <Link href="/gallery?zone=restaurant" onClick={() => setMobileOpen(false)} className="text-sm capitalize text-zinc-400 hover:text-azzurri-blue">Restaurant Gallery</Link>
+               <Link href="/gallery?zone=club" onClick={() => setMobileOpen(false)} className="text-sm capitalize text-zinc-400 hover:text-azzurri-blue">Club Gallery</Link>
+            </div>
+          </div>
+
           <Link href="/contact" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">CONTACT</Link>
 
-          <a href="/select?dest=book" onClick={() => setMobileOpen(false)} className="mt-4 flex items-center justify-center border border-azzurri-blue bg-transparent py-3 text-sm uppercase tracking-widest text-white">
+          <Link href="/book" onClick={() => setMobileOpen(false)} className="mt-4 flex items-center justify-center border border-azzurri-blue bg-transparent py-3 text-sm uppercase tracking-widest text-white">
             BOOK A TABLE
-          </a>
+          </Link>
         </nav>
       </div>
     </header>

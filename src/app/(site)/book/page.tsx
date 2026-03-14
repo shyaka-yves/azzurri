@@ -1,6 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useMemo, useState, useEffect } from 'react';
+import { ZoneSelector } from '@/components/ZoneSelector';
 
 function getMinDateTimeValue(): string {
   const now = new Date();
@@ -12,10 +14,18 @@ function getMinDateTimeValue(): string {
   return iso.slice(0, 16); // yyyy-MM-ddTHH:mm
 }
 
-export default function BookPage({ params }: { params: { zone: string } }) {
+export default function BookPage() {
   const minDateTime = useMemo(getMinDateTimeValue, []);
+  const searchParams = useSearchParams();
   
-  const zone = params?.zone || 'restaurant';
+  const [zone, setZone] = useState<'restaurant' | 'club'>('restaurant');
+
+  useEffect(() => {
+    const zoneParam = searchParams.get('zone');
+    if (zoneParam === 'restaurant' || zoneParam === 'club') {
+      setZone(zoneParam);
+    }
+  }, [searchParams]);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -100,6 +110,8 @@ export default function BookPage({ params }: { params: { zone: string } }) {
             <span className="font-semibold text-[#D4AF37]">2 hours</span> from the current time.
           </p>
         </div>
+
+        <ZoneSelector onZoneChange={setZone} />
 
         <form
           onSubmit={handleSubmit}

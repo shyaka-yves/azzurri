@@ -1,20 +1,44 @@
 'use client';
 
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { FadeIn } from "./FadeIn";
 
 type Zone = 'restaurant' | 'club';
 
 interface ZoneSelectorProps {
-  activeZone: Zone;
-  onZoneChange: (zone: Zone) => void;
+  defaultZone?: Zone;
+  onZoneChange?: (zone: Zone) => void;
 }
 
-export function ZoneSelector({ activeZone, onZoneChange }: ZoneSelectorProps) {
+export function ZoneSelector({ defaultZone = 'restaurant', onZoneChange }: ZoneSelectorProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [activeZone, setActiveZone] = useState<Zone>(defaultZone);
+
+  // Sync internal state with URL param on mount / param change
+  useEffect(() => {
+    const zoneParam = searchParams.get('zone');
+    if (zoneParam === 'restaurant' || zoneParam === 'club') {
+      setActiveZone(zoneParam);
+      onZoneChange?.(zoneParam);
+    }
+  }, [searchParams, onZoneChange]);
+
+  const handleZoneChange = (zone: Zone) => {
+    setActiveZone(zone);
+    onZoneChange?.(zone);
+    // Update the URL without a full page reload or scrolling
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('zone', zone);
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
+
   return (
     <FadeIn className="mb-12">
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
         <button
-          onClick={() => onZoneChange('restaurant')}
+          onClick={() => handleZoneChange('restaurant')}
           className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 ${
             activeZone === 'restaurant'
               ? 'border-azzurri-blue bg-azzurri-blue/10 px-8 py-6 w-full sm:w-64'
@@ -41,7 +65,7 @@ export function ZoneSelector({ activeZone, onZoneChange }: ZoneSelectorProps) {
         <div className="h-px w-8 bg-white/10 sm:h-8 sm:w-px" />
 
         <button
-          onClick={() => onZoneChange('club')}
+          onClick={() => handleZoneChange('club')}
           className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 ${
             activeZone === 'club'
               ? 'border-azzurri-blue bg-azzurri-blue/10 px-8 py-6 w-full sm:w-64'

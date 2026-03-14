@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FadeIn } from "@/components/FadeIn";
+import { ZoneSelector } from "@/components/ZoneSelector";
 import type { SiteContent } from "@/lib/siteContent";
 
 interface MenuViewProps {
@@ -30,6 +31,8 @@ export function MenuView({ content, zone = 'restaurant' }: MenuViewProps) {
 
       <section className="pb-16 sm:pb-24 bg-black/90">
         <div className="mx-auto max-w-5xl px-4">
+          <ZoneSelector defaultZone={zone} />
+
           {activePdf ? (
             <FadeIn key={zone}>
               <div className="rounded-2xl border border-zinc-700/70 bg-zinc-800/20 p-2 sm:p-4 md:p-6 backdrop-blur-sm">
