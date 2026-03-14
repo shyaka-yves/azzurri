@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, Suspense } from 'react';
 import { ZoneSelector } from '@/components/ZoneSelector';
 
 function getMinDateTimeValue(): string {
@@ -15,6 +15,18 @@ function getMinDateTimeValue(): string {
 }
 
 export default function BookPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-[#D4AF37] animate-pulse">Loading Booking Form...</div>
+      </main>
+    }>
+      <BookingContent />
+    </Suspense>
+  );
+}
+
+function BookingContent() {
   const minDateTime = useMemo(getMinDateTimeValue, []);
   const searchParams = useSearchParams();
   

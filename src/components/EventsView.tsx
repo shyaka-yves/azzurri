@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FadeIn } from "@/components/FadeIn";
 import { ZoneSelector } from "@/components/ZoneSelector";
@@ -11,7 +12,15 @@ interface EventsViewProps {
 }
 
 export function EventsView({ events }: EventsViewProps) {
+  const searchParams = useSearchParams();
   const [activeZone, setActiveZone] = useState<'restaurant' | 'club'>('restaurant');
+
+  useEffect(() => {
+    const zoneParam = searchParams.get('zone');
+    if (zoneParam === 'restaurant' || zoneParam === 'club') {
+      setActiveZone(zoneParam);
+    }
+  }, [searchParams]);
 
   // Currently, we don't have a zone field in DB, so we show all for now 
   // but the UI allows for the choice as requested.
@@ -35,7 +44,7 @@ export function EventsView({ events }: EventsViewProps) {
 
       <section className="py-12 sm:py-16 bg-gradient-to-b from-black via-slate-950 to-black">
         <div className="mx-auto max-w-6xl px-4">
-          <ZoneSelector activeZone={activeZone} onZoneChange={setActiveZone} />
+          <ZoneSelector defaultZone={activeZone} onZoneChange={setActiveZone} />
 
           {filteredEvents.length === 0 ? (
             <div className="text-center py-24">

@@ -47,7 +47,7 @@ export type EventsContent = {
 export type GalleryContent = {
   eyebrow: string;
   title: string;
-  items: Array<{ imageSrc: string; alt: string }>;
+  items: Array<{ imageSrc: string; alt: string; zone?: string }>;
 };
 
 export type TestimonialsContent = {

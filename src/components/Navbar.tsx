@@ -12,7 +12,7 @@ const RESTAURANT_DROPDOWN = [
 
 const CLUB_DROPDOWN = [
   { href: "/menu?zone=club", label: "Club Menu" },
-  { href: "/select?dest=vip", label: "VIP Bookings" }, // Optional, can adjust later
+  { href: "#", label: "VIP Bookings" }, // Updated from dead select link
 ];
 
 
@@ -132,12 +132,12 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a
+          <Link
             href="/book"
             className="hidden border border-azzurri-blue bg-transparent px-8 py-3 text-[11px] uppercase tracking-[0.2em] text-azzurri-blue transition-all hover:bg-azzurri-blue hover:text-black lg:inline-flex"
           >
             BOOK A TABLE
-          </a>
+          </Link>
 
           <button
             type="button"

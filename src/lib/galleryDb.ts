@@ -6,14 +6,18 @@ export type GalleryImage = {
   label: string;
   order: number;
   createdAt: string;
+  zone?: string;
 };
 
-const mapRow = (r: { id: string; image_url: string; label: string; order: number; created_at: string }): GalleryImage => ({
+type DbGalleryRow = { id: string; image_url: string; label: string; order: number; created_at: string; zone?: string };
+
+const mapRow = (r: DbGalleryRow): GalleryImage => ({
   id: r.id,
   imageUrl: r.image_url,
   label: r.label,
   order: r.order,
   createdAt: r.created_at,
+  zone: r.zone,
 });
 
 export async function listGalleryImages(): Promise<GalleryImage[]> {
@@ -33,7 +37,7 @@ export async function addGalleryImage(imageUrl: string, label: string, order?: n
   const nextOrder = order ?? (existing.length > 0 ? Math.max(...existing.map((i) => i.order)) + 1 : 0);
   const { data, error } = await supabase
     .from("gallery")
-    .insert({ image_url: imageUrl, label, order: nextOrder })
+    .insert({ image_url: imageUrl, label, order: nextOrder, zone: "restaurant" }) // Default to restaurant
     .select()
     .single();
   if (error) throw error;

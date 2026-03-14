@@ -5,16 +5,18 @@ import Image from "next/image";
 import { FadeIn } from "@/components/FadeIn";
 import { GallerySlideshow } from "@/components/GallerySlideshow";
 import { ZoneSelector } from "@/components/ZoneSelector";
+import { GalleryImage } from "@/lib/galleryDb";
+import { SiteContent } from "@/lib/siteContent";
 
-type ImageItem = { id: string; src: string; label: string };
+type ImageItem = { id: string; src: string; label: string; zone?: string };
 
 export function GalleryView({
     content,
     galleryImages,
     zone = 'restaurant'
 }: {
-    content: any;
-    galleryImages: any[];
+    content: SiteContent;
+    galleryImages: GalleryImage[];
     zone?: 'restaurant' | 'club';
 }) {
     const [slideshow, setSlideshow] = useState<{ isOpen: boolean; index: number }>({
@@ -25,9 +27,9 @@ export function GalleryView({
 
     const allImages: ImageItem[] = galleryImages.length > 0
         ? galleryImages.map(img => ({ id: img.id, src: img.imageUrl, label: img.label, zone: img.zone || 'restaurant' }))
-        : (content.gallery.items || []).map((img: any, idx: number) => ({ id: `content-${idx}`, src: img.imageSrc, label: img.alt, zone: img.zone || 'restaurant' }));
+        : (content.gallery.items || []).map((img, idx) => ({ id: `content-${idx}`, src: img.imageSrc, label: img.alt, zone: img.zone || 'restaurant' }));
         
-    const filteredImages = allImages.filter((img: any) => img.zone === activeZone);
+    const filteredImages = allImages.filter(img => img.zone === activeZone);
 
     return (
         <div className="relative min-h-screen bg-black overflow-x-hidden">

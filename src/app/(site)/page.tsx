@@ -28,7 +28,7 @@ export default async function Home() {
 
   const displayGallery = gallery.length > 0
     ? gallery.slice(0, 6)
-    : content.gallery.items.slice(0, 6).map((item, idx) => ({ id: idx, imageUrl: item.imageSrc, label: item.alt }));
+    : content.gallery.items.slice(0, 6).map((item, idx) => ({ id: `content-${idx}`, imageUrl: item.imageSrc, label: item.alt }));
 
   // Combine and standardize events for display
   const displayEvents = (events.length > 0
@@ -175,9 +175,10 @@ export default async function Home() {
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-16 px-6 lg:flex-row lg:gap-24">
           <FadeIn className="w-full lg:w-1/2">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-zinc-900 shadow-2xl border border-white/5">
-              <img
+              <Image
                 src={content.about.imageSrc}
                 alt={content.about.title}
+                fill
                 className="absolute inset-0 h-full w-full object-cover opacity-90"
               />
             </div>
@@ -216,9 +217,10 @@ export default async function Home() {
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-16 px-6 lg:flex-row-reverse lg:gap-24">
           <FadeIn className="w-full lg:w-1/2">
             <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-zinc-900 shadow-2xl border border-white/5 max-w-md mx-auto lg:mx-0 lg:ml-auto">
-              <img
+              <Image
                 src={content.excellence.imageSrc}
                 alt={content.excellence.title}
+                fill
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
