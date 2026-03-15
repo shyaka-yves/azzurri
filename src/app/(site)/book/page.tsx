@@ -139,7 +139,7 @@ function BookingContent() {
                 Please select your preferred area (Minimum spend applies)
               </p>
               
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
                 {[
                   { id: 'cigar', label: 'Cigar Lounge', pax: '15 pax', minSpend: '2,500,000 RWF' },
                   { id: 'top-vvip', label: 'Top VVIP', pax: '6-8 pax', minSpend: '1,500,000 RWF' },
@@ -150,7 +150,7 @@ function BookingContent() {
                     key={t.id}
                     type="button"
                     onClick={() => setTableType(t.label)}
-                    className={`flex flex-col items-center justify-center gap-2 rounded-2xl border p-6 transition-all ${
+                    className={`flex flex-col items-center justify-center gap-1 rounded-2xl border p-4 transition-all ${
                       tableType === t.label
                         ? 'border-azzurri-blue bg-azzurri-blue/10'
                         : 'border-zinc-800 bg-black/40 hover:border-zinc-700'
@@ -280,7 +280,7 @@ function BookingContent() {
             <button
               type="submit"
               disabled={submitting}
-              className="bg-azzurri-blue inline-flex items-center justify-center rounded-full px-8 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-black shadow-md shadow-blue-500/40 transition hover:shadow-blue-400/60 disabled:cursor-not-allowed disabled:opacity-70"
+              className="bg-azzurri-blue inline-flex items-center justify-center rounded-full px-6 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-black shadow-md shadow-blue-500/40 transition hover:shadow-blue-400/60 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {submitting ? 'Sending...' : 'Submit Booking'}
             </button>

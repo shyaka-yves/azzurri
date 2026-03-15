@@ -97,13 +97,13 @@ export default async function Home() {
             <div className="mt-20 flex flex-col gap-8 sm:flex-row">
               <a
                 href={content.hero.primaryCtaHref}
-                className="inline-flex items-center justify-center rounded-lg bg-azzurri-blue px-14 py-4 text-xs font-bold uppercase tracking-[0.3em] text-black transition-all hover:brightness-110 active:scale-95 shadow-2xl shadow-blue-500/10"
+                className="inline-flex items-center justify-center rounded-lg bg-azzurri-blue px-10 py-3 text-xs font-bold uppercase tracking-[0.3em] text-black transition-all hover:brightness-110 active:scale-95 shadow-2xl shadow-blue-500/10"
               >
                 {content.hero.primaryCtaLabel}
               </a>
               <Link
                 href={content.hero.secondaryCtaHref}
-                className="inline-flex items-center justify-center rounded-lg border border-white/30 px-14 py-4 text-xs font-bold uppercase tracking-[0.4em] text-white transition-all hover:bg-white/5 active:scale-95"
+                className="inline-flex items-center justify-center rounded-lg border border-white/30 px-10 py-3 text-xs font-bold uppercase tracking-[0.4em] text-white transition-all hover:bg-white/5 active:scale-95"
               >
                 {content.hero.secondaryCtaLabel}
               </Link>
@@ -158,7 +158,7 @@ export default async function Home() {
                     <p className="mt-4 text-sm leading-relaxed text-zinc-400 font-light lg:text-base">{event.description}</p>
                     <Link
                       href={event.href}
-                      className="mt-10 inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-azzurri-blue to-[#137d91] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-black shadow-xl shadow-blue-500/10 hover:brightness-110 active:scale-95 transition-all"
+                      className="mt-10 inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-azzurri-blue to-[#137d91] px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-black shadow-xl shadow-blue-500/10 hover:brightness-110 active:scale-95 transition-all"
                       aria-label={`Learn more about ${event.title}`}
                     >
                       Learn More
@@ -336,7 +336,7 @@ export default async function Home() {
           <FadeIn className="mt-12 text-center">
             <Link
               href="/gallery"
-              className="inline-flex items-center justify-center rounded-lg border border-azzurri-blue px-12 py-4 text-xs font-bold uppercase tracking-[0.2em] text-azzurri-blue transition-all hover:bg-azzurri-blue hover:text-black active:scale-95"
+              className="inline-flex items-center justify-center rounded-lg border border-azzurri-blue px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] text-azzurri-blue transition-all hover:bg-azzurri-blue hover:text-black active:scale-95"
             >
               View Full Gallery
             </Link>
@@ -387,7 +387,7 @@ export default async function Home() {
                 href="https://maps.google.com/?q=Azzurri+Kigali+Kimihurura"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-lg bg-azzurri-blue px-14 py-4 text-xs font-bold uppercase tracking-[0.3em] text-black transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-blue-500/10"
+                className="inline-flex items-center justify-center rounded-lg bg-azzurri-blue px-10 py-3 text-xs font-bold uppercase tracking-[0.3em] text-black transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-blue-500/10"
               >
                 GET DIRECTION
               </a>

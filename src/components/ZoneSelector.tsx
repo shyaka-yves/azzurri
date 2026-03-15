@@ -41,8 +41,8 @@ export function ZoneSelector({ defaultZone = 'restaurant', onZoneChange }: ZoneS
           onClick={() => handleZoneChange('restaurant')}
           className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 ${
             activeZone === 'restaurant'
-              ? 'border-azzurri-blue bg-azzurri-blue/10 px-8 py-6 w-full sm:w-64'
-              : 'border-white/10 bg-black/40 px-6 py-4 w-full sm:w-56 hover:border-white/30'
+              ? 'border-azzurri-blue bg-azzurri-blue/10 px-6 py-4 w-full sm:w-56'
+              : 'border-white/10 bg-black/40 px-4 py-3 w-full sm:w-48 hover:border-white/30'
           }`}
         >
           <div className="relative z-10 text-center">
@@ -68,8 +68,8 @@ export function ZoneSelector({ defaultZone = 'restaurant', onZoneChange }: ZoneS
           onClick={() => handleZoneChange('club')}
           className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 ${
             activeZone === 'club'
-              ? 'border-azzurri-blue bg-azzurri-blue/10 px-8 py-6 w-full sm:w-64'
-              : 'border-white/10 bg-black/40 px-6 py-4 w-full sm:w-56 hover:border-white/30'
+              ? 'border-azzurri-blue bg-azzurri-blue/10 px-6 py-4 w-full sm:w-56'
+              : 'border-white/10 bg-black/40 px-4 py-3 w-full sm:w-48 hover:border-white/30'
           }`}
         >
           <div className="relative z-10 text-center">

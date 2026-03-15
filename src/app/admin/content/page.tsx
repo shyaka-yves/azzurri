@@ -154,6 +154,27 @@ export default function AdminContentPage() {
 
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Headline</p>
+              <input
+                type="text"
+                value={content.hero.headline || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, hero: { ...c.hero, headline: e.target.value } }))}
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Sub-headline</p>
+              <input
+                type="text"
+                value={content.hero.subheadline || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, hero: { ...c.hero, subheadline: e.target.value } }))}
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
               <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Primary CTA (Label)</p>
               <input
                 type="text"
@@ -294,8 +315,17 @@ export default function AdminContentPage() {
         </div>
       </EditorCard>
 
-      <EditorCard title="Excellence section content">
+      <EditorCard title="Azzurri Excellence (Standard)">
         <div className="space-y-6">
+          <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Eyebrow</p>
+            <input
+              type="text"
+              value={content.excellence.eyebrow || ""}
+              onChange={(e) => setContent((c: any) => ({ ...c, excellence: { ...c.excellence, eyebrow: e.target.value } }))}
+              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+            />
+          </div>
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
               <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Heading</p>
@@ -382,7 +412,41 @@ export default function AdminContentPage() {
         </div>
       </EditorCard>
 
-      <EditorCard title="Events section images">
+      <EditorCard title="Upcoming Events Meta">
+        <div className="space-y-6">
+          <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Eyebrow</p>
+            <input
+              type="text"
+              value={content.events.eyebrow || ""}
+              onChange={(e) => setContent((c: any) => ({ ...c, events: { ...c.events, eyebrow: e.target.value } }))}
+              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+            />
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Section Title</p>
+              <input
+                type="text"
+                value={content.events.title || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, events: { ...c.events, title: e.target.value } }))}
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Section Description</p>
+              <input
+                type="text"
+                value={content.events.description || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, events: { ...c.events, description: e.target.value } }))}
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+          </div>
+        </div>
+      </EditorCard>
+
+      <EditorCard title="Upcoming Events Images (Static Fallbacks)">
         <div className="grid gap-4 md:grid-cols-2">
           {(content.events.items ?? []).map((_: any, i: number) => (
             <Select
@@ -406,38 +470,69 @@ export default function AdminContentPage() {
         </div>
       </EditorCard>
 
-      <EditorCard title="Tasting Notes section image (Menu Intro)">
-        <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
-          <Select
-            label="Choose from Media Library"
-            value={content.menuIntro?.imageSrc || ""}
-            options={[
-              { label: "— Select —", value: "" },
-              ...imageOptions.map((m) => ({ label: m.name, value: m.url })),
-            ]}
-            onChange={(v) =>
-              setContent((c: any) => ({
-                ...c,
-                menuIntro: { ...c.menuIntro, imageSrc: v },
-              }))
-            }
-          />
+      <EditorCard title="Tasting Notes (Menu Intro)">
+        <div className="space-y-6">
           <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">
-              Or paste image URL / path
-            </p>
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Eyebrow</p>
             <input
               type="text"
+              value={content.menuIntro.eyebrow || ""}
+              onChange={(e) => setContent((c: any) => ({ ...c, menuIntro: { ...c.menuIntro, eyebrow: e.target.value } }))}
+              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+            />
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Title</p>
+              <input
+                type="text"
+                value={content.menuIntro.title || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, menuIntro: { ...c.menuIntro, title: e.target.value } }))}
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Description</p>
+              <input
+                type="text"
+                value={content.menuIntro.description || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, menuIntro: { ...c.menuIntro, description: e.target.value } }))}
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+          </div>
+          <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+            <Select
+              label="Choose from Media Library"
               value={content.menuIntro?.imageSrc || ""}
-              onChange={(e) =>
+              options={[
+                { label: "— Select —", value: "" },
+                ...imageOptions.map((m) => ({ label: m.name, value: m.url })),
+              ]}
+              onChange={(v) =>
                 setContent((c: any) => ({
                   ...c,
-                  menuIntro: { ...c.menuIntro, imageSrc: e.target.value },
+                  menuIntro: { ...c.menuIntro, imageSrc: v },
                 }))
               }
-              placeholder="e.g. /uploads/tasting-notes.jpg or https://..."
-              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-[#D4AF37] focus:outline-none"
             />
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">
+                Or paste image URL / path
+              </p>
+              <input
+                type="text"
+                value={content.menuIntro?.imageSrc || ""}
+                onChange={(e) =>
+                  setContent((c: any) => ({
+                    ...c,
+                    menuIntro: { ...c.menuIntro, imageSrc: e.target.value },
+                  }))
+                }
+                placeholder="e.g. /uploads/tasting-notes.jpg or https://..."
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
           </div>
         </div>
       </EditorCard>
@@ -748,6 +843,26 @@ export default function AdminContentPage() {
               />
             </div>
           </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Specialty Content</p>
+              <textarea
+                value={content.specialty.content || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, specialty: { ...c.specialty, content: e.target.value } }))}
+                rows={4}
+                className="mt-2 w-full rounded-xl border border-zinc-700/80 bg-black/70 p-3 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Special Offers Content</p>
+              <textarea
+                value={content.specialOffers.content || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, specialOffers: { ...c.specialOffers, content: e.target.value } }))}
+                rows={4}
+                className="mt-2 w-full rounded-xl border border-zinc-700/80 bg-black/70 p-3 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+          </div>
         </div>
       </EditorCard>
 
@@ -772,6 +887,35 @@ export default function AdminContentPage() {
                 className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
               />
             </div>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Address Lines (One per line)</p>
+              <textarea
+                value={(content.contact.addressLines || []).join("\n")}
+                onChange={(e) => setContent((c: any) => ({ ...c, contact: { ...c.contact, addressLines: e.target.value.split("\n") } }))}
+                rows={3}
+                className="mt-2 w-full rounded-xl border border-zinc-700/80 bg-black/70 p-3 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Hours Lines (One per line)</p>
+              <textarea
+                value={(content.contact.hoursLines || []).join("\n")}
+                onChange={(e) => setContent((c: any) => ({ ...c, contact: { ...c.contact, hoursLines: e.target.value.split("\n") } }))}
+                rows={3}
+                className="mt-2 w-full rounded-xl border border-zinc-700/80 bg-black/70 p-3 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+          </div>
+          <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Address Note</p>
+            <input
+              type="text"
+              value={content.contact.addressNote || ""}
+              onChange={(e) => setContent((c: any) => ({ ...c, contact: { ...c.contact, addressNote: e.target.value } }))}
+              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+            />
           </div>
           <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
             <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Map Embed URL (iframe src)</p>
