@@ -76,6 +76,7 @@ export type ContactContent = {
   email: string;
   phone: string;
   mapEmbedSrc: string;
+  directionsUrl: string;
 };
 
 export type MenuIntroContent = {
@@ -267,6 +268,7 @@ function getDefaultContent(): SiteContent {
       email: "reservation@azzurrirwanda.com",
       phone: "+250 792 880 335",
       mapEmbedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.534425993558!2d30.055222774966932!3d-1.9387409980436723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca5b8c42a7f63%3A0x14cf363a1f515ab0!2sAzzurri%20Restaurant%2C%20Club%20%26%20Lounge!5e0!3m2!1sen!2srw!4v1773607724597!5m2!1sen!2srw",
+      directionsUrl: "https://maps.google.com/?q=Azzurri+Kigali+Kimihurura",
     },
     menu: {
       restaurantPdfUrl: "",
@@ -287,8 +289,20 @@ export async function getSiteContent(): Promise<SiteContent> {
   const defaults = getDefaultContent();
   try {
     const supabase = getSupabase();
+    console.log("Fetching site content for ID:", CONTENT_ROW_ID);
     const { data, error } = await supabase.from("content").select("data").eq("id", CONTENT_ROW_ID).maybeSingle();
-    if (error || !data?.data || typeof data.data !== "object") return defaults;
+    
+    if (error) {
+      console.error("Supabase fetch error for site content:", error);
+      return defaults;
+    }
+    
+    if (!data?.data || typeof data.data !== "object") {
+      console.warn("No data found or invalid format for site content ID:", CONTENT_ROW_ID);
+      return defaults;
+    }
+    
+    console.log("Successfully fetched site content from Supabase.");
     const parsed = data.data as Partial<SiteContent>;
     return {
       hero: { ...defaults.hero, ...parsed.hero },
@@ -305,7 +319,8 @@ export async function getSiteContent(): Promise<SiteContent> {
       specialty: { ...defaults.specialty, ...parsed.specialty },
       specialOffers: { ...defaults.specialOffers, ...parsed.specialOffers },
     };
-  } catch {
+  } catch (err) {
+    console.error("Critical error in getSiteContent:", err);
     return defaults;
   }
 }

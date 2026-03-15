@@ -64,7 +64,7 @@ export default async function ContactPage() {
                     Make Reservation
                   </a>
                   <a
-                    href={`https://maps.google.com/?q=${encodeURIComponent(contact.addressLines.join(", "))}`}
+                    href={contact.directionsUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex h-11 w-[280px] items-center justify-center whitespace-nowrap rounded-md border border-[#D4AF37] px-8 text-xs font-semibold uppercase tracking-[0.18em] text-[#D4AF37] hover:bg-[#D4AF37]/10"

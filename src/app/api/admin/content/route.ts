@@ -9,11 +9,16 @@ export async function GET() {
 }
 
 export async function PUT(req: Request) {
-  const body = (await req.json().catch(() => null)) as SiteContent | null;
-  if (!body) {
-    return NextResponse.json({ ok: false, error: "Invalid payload" }, { status: 400 });
+  try {
+    const body = (await req.json().catch(() => null)) as SiteContent | null;
+    if (!body) {
+      return NextResponse.json({ ok: false, error: "Invalid payload" }, { status: 400 });
+    }
+    await saveSiteContent(body);
+    return NextResponse.json({ ok: true });
+  } catch (err: any) {
+    console.error("Admin content save error:", err);
+    return NextResponse.json({ ok: false, error: err.message || "Save failed" }, { status: 500 });
   }
-  await saveSiteContent(body);
-  return NextResponse.json({ ok: true });
 }
 

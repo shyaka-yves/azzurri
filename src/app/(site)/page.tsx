@@ -384,7 +384,7 @@ export default async function Home() {
               </div>
 
               <a
-                href="https://maps.google.com/?q=Azzurri+Kigali+Kimihurura"
+                href={content.contact.directionsUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center rounded-lg bg-azzurri-blue px-10 py-3 text-xs font-bold uppercase tracking-[0.3em] text-black transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-blue-500/10"

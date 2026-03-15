@@ -926,6 +926,15 @@ export default function AdminContentPage() {
               className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
             />
           </div>
+          <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Get Directions Link (button URL)</p>
+            <input
+              type="text"
+              value={content.contact.directionsUrl || ""}
+              onChange={(e) => setContent((c: any) => ({ ...c, contact: { ...c.contact, directionsUrl: e.target.value } }))}
+              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+            />
+          </div>
         </div>
       </EditorCard>
     </div>
