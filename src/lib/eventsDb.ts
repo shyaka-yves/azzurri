@@ -8,9 +8,10 @@ export type Event = {
   imageUrl: string;
   order: number;
   createdAt: string;
+  zone: "restaurant" | "club" | "both";
 };
 
-const mapRow = (r: { id: string; date: string; title: string; description: string; image_url: string; order: number; created_at: string }): Event => ({
+const mapRow = (r: { id: string; date: string; title: string; description: string; image_url: string; order: number; created_at: string; zone: string }): Event => ({
   id: r.id,
   date: r.date,
   title: r.title,
@@ -18,6 +19,7 @@ const mapRow = (r: { id: string; date: string; title: string; description: strin
   imageUrl: r.image_url,
   order: r.order,
   createdAt: r.created_at,
+  zone: (r.zone as "restaurant" | "club" | "both") || "both",
 });
 
 export async function listEvents(): Promise<Event[]> {
@@ -36,6 +38,7 @@ export async function addEvent(
   title: string,
   description: string,
   imageUrl: string,
+  zone: "restaurant" | "club" | "both" = "both",
   order?: number
 ): Promise<Event> {
   const supabase = getSupabase();
@@ -43,7 +46,7 @@ export async function addEvent(
   const nextOrder = order ?? (existing.length > 0 ? Math.max(...existing.map((e) => e.order)) + 1 : 0);
   const { data, error } = await supabase
     .from("events")
-    .insert({ date, title, description, image_url: imageUrl, order: nextOrder })
+    .insert({ date, title, description, image_url: imageUrl, order: nextOrder, zone })
     .select()
     .single();
   if (error) throw error;
@@ -52,7 +55,7 @@ export async function addEvent(
 
 export async function updateEvent(
   id: string,
-  updates: Partial<Pick<Event, "date" | "title" | "description" | "imageUrl" | "order">>
+  updates: Partial<Pick<Event, "date" | "title" | "description" | "imageUrl" | "order" | "zone">>
 ): Promise<boolean> {
   const supabase = getSupabase();
   const row: Record<string, unknown> = {};
@@ -61,6 +64,7 @@ export async function updateEvent(
   if (updates.description !== undefined) row.description = updates.description;
   if (updates.imageUrl !== undefined) row.image_url = updates.imageUrl;
   if (updates.order !== undefined) row.order = updates.order;
+  if (updates.zone !== undefined) row.zone = updates.zone;
   if (Object.keys(row).length === 0) return true;
   const { error } = await supabase.from("events").update(row).eq("id", id);
   return !error;

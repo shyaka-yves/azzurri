@@ -9,11 +9,12 @@ import type { Event } from "@/lib/eventsDb";
 
 interface EventsViewProps {
   events: Event[];
+  zone?: 'restaurant' | 'club';
 }
 
-export function EventsView({ events }: EventsViewProps) {
+export function EventsView({ events, zone = 'restaurant' }: EventsViewProps) {
   const searchParams = useSearchParams();
-  const [activeZone, setActiveZone] = useState<'restaurant' | 'club'>('restaurant');
+  const [activeZone, setActiveZone] = useState<'restaurant' | 'club'>(zone);
 
   useEffect(() => {
     const zoneParam = searchParams.get('zone');
@@ -22,10 +23,7 @@ export function EventsView({ events }: EventsViewProps) {
     }
   }, [searchParams]);
 
-  // Currently, we don't have a zone field in DB, so we show all for now 
-  // but the UI allows for the choice as requested.
-  // In the future, we can filter by event.zone
-  const filteredEvents = events; 
+  const filteredEvents = events.filter(event => event.zone === activeZone || event.zone === 'both'); 
 
   return (
     <div className="relative overflow-hidden">

@@ -29,7 +29,7 @@ export function GalleryView({
         ? galleryImages.map(img => ({ id: img.id, src: img.imageUrl, label: img.label, zone: img.zone || 'restaurant' }))
         : (content.gallery.items || []).map((img, idx) => ({ id: `content-${idx}`, src: img.imageSrc, label: img.alt, zone: img.zone || 'restaurant' }));
         
-    const filteredImages = allImages.filter(img => img.zone === activeZone);
+    const filteredImages = allImages.filter(img => img.zone === activeZone || img.zone === 'both');
 
     return (
         <div className="relative min-h-screen bg-black overflow-x-hidden">

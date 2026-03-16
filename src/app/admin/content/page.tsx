@@ -537,38 +537,78 @@ export default function AdminContentPage() {
         </div>
       </EditorCard>
 
-      <EditorCard title="Menu PDF">
-        <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
-          <Select
-            label="Choose from Media Library"
-            value={content.menu?.pdfUrl || ""}
-            options={[
-              { label: "— Select —", value: "" },
-              ...pdfOptions.map((m) => ({ label: m.name, value: m.url })),
-            ]}
-            onChange={(v) =>
-              setContent((c: any) => ({
-                ...c,
-                menu: { ...c.menu, pdfUrl: v },
-              }))
-            }
-          />
-          <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">
-              Or paste PDF URL / path
-            </p>
-            <input
-              type="text"
-              value={content.menu?.pdfUrl || ""}
-              onChange={(e) =>
-                setContent((c: any) => ({
-                  ...c,
-                  menu: { ...c.menu, pdfUrl: e.target.value },
-                }))
-              }
-              placeholder="e.g. /uploads/menu.pdf or https://..."
-              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-[#D4AF37] focus:outline-none"
-            />
+      <EditorCard title="Menu PDFs">
+        <div className="grid gap-8">
+          <div className="space-y-4">
+            <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-[#D4AF37]">Restaurant Menu</h3>
+            <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+              <Select
+                label="Choose from Media Library"
+                value={content.menu?.restaurantPdfUrl || ""}
+                options={[
+                  { label: "— Select —", value: "" },
+                  ...pdfOptions.map((m) => ({ label: m.name, value: m.url })),
+                ]}
+                onChange={(v) =>
+                  setContent((c: any) => ({
+                    ...c,
+                    menu: { ...c.menu, restaurantPdfUrl: v },
+                  }))
+                }
+              />
+              <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">
+                  Or paste PDF URL
+                </p>
+                <input
+                  type="text"
+                  value={content.menu?.restaurantPdfUrl || ""}
+                  onChange={(e) =>
+                    setContent((c: any) => ({
+                      ...c,
+                      menu: { ...c.menu, restaurantPdfUrl: e.target.value },
+                    }))
+                  }
+                  className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-[#D4AF37] focus:outline-none"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4 pt-6 border-t border-zinc-800">
+            <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-[#D4AF37]">Club Menu</h3>
+            <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+              <Select
+                label="Choose from Media Library"
+                value={content.menu?.clubPdfUrl || ""}
+                options={[
+                  { label: "— Select —", value: "" },
+                  ...pdfOptions.map((m) => ({ label: m.name, value: m.url })),
+                ]}
+                onChange={(v) =>
+                  setContent((c: any) => ({
+                    ...c,
+                    menu: { ...c.menu, clubPdfUrl: v },
+                  }))
+                }
+              />
+              <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">
+                  Or paste PDF URL
+                </p>
+                <input
+                  type="text"
+                  value={content.menu?.clubPdfUrl || ""}
+                  onChange={(e) =>
+                    setContent((c: any) => ({
+                      ...c,
+                      menu: { ...c.menu, clubPdfUrl: e.target.value },
+                    }))
+                  }
+                  className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-[#D4AF37] focus:outline-none"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </EditorCard>

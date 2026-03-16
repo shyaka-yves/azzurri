@@ -9,8 +9,11 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function EventsPage() {
-  const events = await listEvents();
+export default async function EventsPage({ searchParams }: { searchParams: Promise<{ zone?: string }> }) {
+  const [events, { zone }] = await Promise.all([
+    listEvents(),
+    searchParams
+  ]);
 
-  return <EventsView events={events} />;
+  return <EventsView events={events} zone={zone as 'restaurant' | 'club'} />;
 }

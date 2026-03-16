@@ -24,13 +24,14 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = (await req.json().catch(() => null)) as
-      | { date?: string; title?: string; description?: string; imageUrl?: string; order?: number }
+      | { date?: string; title?: string; description?: string; imageUrl?: string; order?: number; zone?: string }
       | null;
 
     const date = body?.date?.trim() ?? "";
     const title = body?.title?.trim() ?? "";
     const description = body?.description?.trim() ?? "";
     const imageUrl = body?.imageUrl?.trim() ?? "";
+    const zone = (body?.zone?.trim() as "restaurant" | "club" | "both") ?? "both";
     const order = body?.order;
 
     if (!date || !title || !description || !imageUrl) {
@@ -40,7 +41,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const event = await addEvent(date, title, description, imageUrl, order);
+    const event = await addEvent(date, title, description, imageUrl, zone, order);
     return NextResponse.json({ ok: true, event });
   } catch (error) {
     return NextResponse.json(
@@ -53,7 +54,7 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   try {
     const body = (await req.json().catch(() => null)) as
-      | { id?: string; date?: string; title?: string; description?: string; imageUrl?: string; order?: number }
+      | { id?: string; date?: string; title?: string; description?: string; imageUrl?: string; order?: number; zone?: string }
       | null;
 
     const id = body?.id;
@@ -61,13 +62,14 @@ export async function PUT(req: Request) {
       return NextResponse.json({ ok: false, error: "Event ID required" }, { status: 400 });
     }
 
-    const updates: Partial<{ date: string; title: string; description: string; imageUrl: string; order: number }> =
+    const updates: Partial<{ date: string; title: string; description: string; imageUrl: string; order: number; zone: "restaurant" | "club" | "both" }> =
       {};
     if (body?.date) updates.date = body.date.trim();
     if (body?.title) updates.title = body.title.trim();
     if (body?.description) updates.description = body.description.trim();
     if (body?.imageUrl) updates.imageUrl = body.imageUrl.trim();
     if (typeof body?.order === "number") updates.order = body.order;
+    if (body?.zone) updates.zone = body.zone.trim() as "restaurant" | "club" | "both";
 
     const updated = await updateEvent(id, updates);
     if (!updated) {

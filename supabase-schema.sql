@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS events (
   title TEXT NOT NULL,
   description TEXT NOT NULL,
   image_url TEXT NOT NULL,
-  "order" INT NOT NULL DEFAULT 0
+  "order" INT NOT NULL DEFAULT 0,
+  zone TEXT NOT NULL DEFAULT 'both' CHECK (zone IN ('restaurant', 'club', 'both'))
 );
 
 -- Gallery images
@@ -45,8 +46,13 @@ CREATE TABLE IF NOT EXISTS gallery (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   image_url TEXT NOT NULL,
   label TEXT NOT NULL DEFAULT '',
-  "order" INT NOT NULL DEFAULT 0
+  "order" INT NOT NULL DEFAULT 0,
+  zone TEXT NOT NULL DEFAULT 'both' CHECK (zone IN ('restaurant', 'club', 'both'))
 );
+
+-- If tables already exist, run these:
+-- ALTER TABLE events ADD COLUMN IF NOT EXISTS zone TEXT NOT NULL DEFAULT 'both' CHECK (zone IN ('restaurant', 'club', 'both'));
+-- ALTER TABLE gallery ADD COLUMN IF NOT EXISTS zone TEXT NOT NULL DEFAULT 'both' CHECK (zone IN ('restaurant', 'club', 'both'));
 
 -- Site content (hero, about, menu pdf, etc.) – single row
 CREATE TABLE IF NOT EXISTS content (

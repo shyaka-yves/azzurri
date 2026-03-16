@@ -31,13 +31,18 @@ export async function listGalleryImages(): Promise<GalleryImage[]> {
   }
 }
 
-export async function addGalleryImage(imageUrl: string, label: string, order?: number): Promise<GalleryImage> {
+export async function addGalleryImage(
+  imageUrl: string,
+  label: string,
+  zone: "restaurant" | "club" | "both" = "both",
+  order?: number
+): Promise<GalleryImage> {
   const supabase = getSupabase();
   const existing = await listGalleryImages();
   const nextOrder = order ?? (existing.length > 0 ? Math.max(...existing.map((i) => i.order)) + 1 : 0);
   const { data, error } = await supabase
     .from("gallery")
-    .insert({ image_url: imageUrl, label, order: nextOrder, zone: "restaurant" }) // Default to restaurant
+    .insert({ image_url: imageUrl, label, order: nextOrder, zone })
     .select()
     .single();
   if (error) throw error;
@@ -46,13 +51,14 @@ export async function addGalleryImage(imageUrl: string, label: string, order?: n
 
 export async function updateGalleryImage(
   id: string,
-  updates: Partial<Pick<GalleryImage, "label" | "order" | "imageUrl">>
+  updates: Partial<Pick<GalleryImage, "label" | "order" | "imageUrl" | "zone">>
 ): Promise<boolean> {
   const supabase = getSupabase();
   const row: Record<string, unknown> = {};
   if (updates.label !== undefined) row.label = updates.label;
   if (updates.order !== undefined) row.order = updates.order;
   if (updates.imageUrl !== undefined) row.image_url = updates.imageUrl;
+  if (updates.zone !== undefined) row.zone = updates.zone;
   if (Object.keys(row).length === 0) return true;
   const { error } = await supabase.from("gallery").update(row).eq("id", id);
   return !error;

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type MediaFile = { name: string; url: string; type: "image" | "video" };
-type Event = { id: string; date: string; title: string; description: string; imageUrl: string; order: number; createdAt: string };
+type Event = { id: string; date: string; title: string; description: string; imageUrl: string; order: number; createdAt: string; zone: "restaurant" | "club" | "both" };
 
 export default function AdminEventsPage() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -13,7 +13,7 @@ export default function AdminEventsPage() {
   const [error, setError] = useState<string | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [formData, setFormData] = useState({ date: "", title: "", description: "", imageUrl: "" });
+  const [formData, setFormData] = useState({ date: "", title: "", description: "", imageUrl: "", zone: "both" });
 
   async function refreshEvents() {
     try {
@@ -50,7 +50,7 @@ export default function AdminEventsPage() {
   }, []);
 
   function openAddModal() {
-    setFormData({ date: "", title: "", description: "", imageUrl: "" });
+    setFormData({ date: "", title: "", description: "", imageUrl: "", zone: "both" });
     setEditingId(null);
     setShowAddModal(true);
     refreshMedia();
@@ -62,6 +62,7 @@ export default function AdminEventsPage() {
       title: event.title,
       description: event.description,
       imageUrl: event.imageUrl,
+      zone: event.zone || "both",
     });
     setEditingId(event.id);
     setShowAddModal(true);
@@ -95,7 +96,7 @@ export default function AdminEventsPage() {
       await refreshEvents();
       setShowAddModal(false);
       setEditingId(null);
-      setFormData({ date: "", title: "", description: "", imageUrl: "" });
+      setFormData({ date: "", title: "", description: "", imageUrl: "", zone: "both" });
     } catch {
       setError("Failed to save event");
     }
@@ -182,7 +183,7 @@ export default function AdminEventsPage() {
           onClose={() => {
             setShowAddModal(false);
             setEditingId(null);
-            setFormData({ date: "", title: "", description: "", imageUrl: "" });
+            setFormData({ date: "", title: "", description: "", imageUrl: "", zone: "both" });
           }}
         />
       )}
@@ -206,7 +207,12 @@ function EventCard({
       </div>
       <div className="space-y-2 px-4 py-3">
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#D4AF37]">{event.date}</p>
-        <h3 className="text-sm font-semibold text-white">{event.title}</h3>
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-semibold text-white">{event.title}</h3>
+          <span className="rounded bg-white/5 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-zinc-400">
+            {event.zone}
+          </span>
+        </div>
         <p className="line-clamp-2 text-xs text-zinc-300">{event.description}</p>
         <div className="flex gap-2 pt-2">
           <button
@@ -236,7 +242,7 @@ function EventModal({
   onClose,
 }: {
   availableImages: MediaFile[];
-  formData: { date: string; title: string; description: string; imageUrl: string };
+  formData: { date: string; title: string; description: string; imageUrl: string; zone: string };
   isEditing: boolean;
   onFormChange: (field: string, value: string) => void;
   onSave: () => void;
@@ -277,6 +283,28 @@ function EventModal({
               placeholder="Event title"
               className="w-full rounded border border-zinc-700/80 bg-black/60 px-4 py-2 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-[#D4AF37] focus:outline-none"
             />
+          </div>
+
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-[0.18em] text-zinc-400 mb-2">
+              Zone (Where to display)
+            </label>
+            <div className="flex gap-4">
+              {["restaurant", "club", "both"].map((z) => (
+                <button
+                  key={z}
+                  type="button"
+                  onClick={() => onFormChange("zone", z)}
+                  className={`flex-1 rounded border py-2 text-[10px] font-bold uppercase tracking-widest transition ${
+                    formData.zone === z
+                      ? "border-[#D4AF37] bg-[#D4AF37]/10 text-[#D4AF37]"
+                      : "border-zinc-700/80 text-zinc-500 hover:border-zinc-600"
+                  }`}
+                >
+                  {z}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div>

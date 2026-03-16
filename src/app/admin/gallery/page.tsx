@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type MediaFile = { name: string; url: string; type: "image" | "video" };
-type GalleryImage = { id: string; imageUrl: string; label: string; order: number; createdAt: string };
+type GalleryImage = { id: string; imageUrl: string; label: string; order: number; createdAt: string; zone: "restaurant" | "club" | "both" };
 
 export default function AdminGalleryPage() {
   const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
@@ -14,6 +14,7 @@ export default function AdminGalleryPage() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [selectedImageUrl, setSelectedImageUrl] = useState("");
   const [selectedLabel, setSelectedLabel] = useState("");
+  const [selectedZone, setSelectedZone] = useState<"restaurant" | "club" | "both">("both");
 
   async function refreshGallery() {
     try {
@@ -60,7 +61,11 @@ export default function AdminGalleryPage() {
       const res = await fetch("/api/admin/gallery", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageUrl: selectedImageUrl, label: selectedLabel.trim() }),
+        body: JSON.stringify({
+          imageUrl: selectedImageUrl,
+          label: selectedLabel.trim(),
+          zone: selectedZone,
+        }),
       });
       const data = (await res.json()) as { ok: boolean; error?: string };
       if (!data.ok) {
@@ -71,6 +76,7 @@ export default function AdminGalleryPage() {
       setShowAddModal(false);
       setSelectedImageUrl("");
       setSelectedLabel("");
+      setSelectedZone("both");
     } catch {
       setError("Failed to add image");
     }
@@ -82,7 +88,7 @@ export default function AdminGalleryPage() {
       const res = await fetch("/api/admin/gallery", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, label: newLabel.trim() }),
+        body: JSON.stringify({ id, label: newLabel.trim() }), // Label update only
       });
       const data = (await res.json()) as { ok: boolean; error?: string };
       if (!data.ok) {
@@ -114,6 +120,25 @@ export default function AdminGalleryPage() {
       await refreshGallery();
     } catch {
       setError("Failed to remove image");
+    }
+  }
+
+  async function updateZone(id: string, newZone: "restaurant" | "club" | "both") {
+    setError(null);
+    try {
+      const res = await fetch("/api/admin/gallery", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, zone: newZone }),
+      });
+      const data = (await res.json()) as { ok: boolean; error?: string };
+      if (!data.ok) {
+        setError(data.error ?? "Failed to update zone");
+        return;
+      }
+      await refreshGallery();
+    } catch {
+      setError("Failed to update zone");
     }
   }
 
@@ -164,6 +189,7 @@ export default function AdminGalleryPage() {
                   key={img.id}
                   image={img}
                   onUpdateLabel={(label) => updateLabel(img.id, label)}
+                  onUpdateZone={(zone) => updateZone(img.id, zone)}
                   onDelete={() => deleteFromGallery(img.id)}
                 />
               ))}
@@ -180,10 +206,13 @@ export default function AdminGalleryPage() {
           onImageSelect={setSelectedImageUrl}
           onLabelChange={setSelectedLabel}
           onAdd={addToGallery}
+          selectedZone={selectedZone}
+          onZoneChange={setSelectedZone}
           onClose={() => {
             setShowAddModal(false);
             setSelectedImageUrl("");
             setSelectedLabel("");
+            setSelectedZone("both");
           }}
         />
       )}
@@ -194,10 +223,12 @@ export default function AdminGalleryPage() {
 function GalleryImageCard({
   image,
   onUpdateLabel,
+  onUpdateZone,
   onDelete,
 }: {
   image: GalleryImage;
   onUpdateLabel: (label: string) => void;
+  onUpdateZone: (zone: "restaurant" | "club" | "both") => void;
   onDelete: () => void;
 }) {
   const [editingLabel, setEditingLabel] = useState(false);
@@ -246,13 +277,24 @@ function GalleryImageCard({
             >
               {image.label}
             </p>
-            <button
-              type="button"
-              onClick={onDelete}
-              className="rounded-full border border-zinc-700/80 px-3 py-1 text-xs text-zinc-200 hover:border-red-400/50 hover:text-red-200"
-            >
-              Remove
-            </button>
+            <div className="flex items-center gap-2">
+              <select
+                value={image.zone}
+                onChange={(e) => onUpdateZone(e.target.value as any)}
+                className="rounded bg-white/5 border border-zinc-700/80 px-1 py-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-400 focus:outline-none focus:border-[#D4AF37]"
+              >
+                <option value="both">Both</option>
+                <option value="restaurant">Restaurant</option>
+                <option value="club">Club</option>
+              </select>
+              <button
+                type="button"
+                onClick={onDelete}
+                className="rounded-full border border-zinc-700/80 px-3 py-1 text-xs text-zinc-200 hover:border-red-400/50 hover:text-red-200"
+              >
+                Remove
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -264,16 +306,20 @@ function AddImageModal({
   availableImages,
   selectedImageUrl,
   selectedLabel,
+  selectedZone,
   onImageSelect,
   onLabelChange,
+  onZoneChange,
   onAdd,
   onClose,
 }: {
   availableImages: MediaFile[];
   selectedImageUrl: string;
   selectedLabel: string;
+  selectedZone: "restaurant" | "club" | "both";
   onImageSelect: (url: string) => void;
   onLabelChange: (label: string) => void;
+  onZoneChange: (zone: "restaurant" | "club" | "both") => void;
   onAdd: () => void;
   onClose: () => void;
 }) {
@@ -334,6 +380,28 @@ function AddImageModal({
               placeholder="Enter label"
               className="w-full rounded border border-zinc-700/80 bg-black/60 px-4 py-2 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-[#D4AF37] focus:outline-none"
             />
+          </div>
+
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-[0.18em] text-zinc-400 mb-2">
+              Zone (Where to display)
+            </label>
+            <div className="flex gap-4">
+              {["restaurant", "club", "both"].map((z) => (
+                <button
+                  key={z}
+                  type="button"
+                  onClick={() => onZoneChange(z as any)}
+                  className={`flex-1 rounded border py-2 text-[10px] font-bold uppercase tracking-widest transition ${
+                    selectedZone === z
+                      ? "border-[#D4AF37] bg-[#D4AF37]/10 text-[#D4AF37]"
+                      : "border-zinc-700/80 text-zinc-500 hover:border-zinc-600"
+                  }`}
+                >
+                  {z}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="flex gap-3 justify-end">

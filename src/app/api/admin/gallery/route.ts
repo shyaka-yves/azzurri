@@ -26,18 +26,19 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = (await req.json().catch(() => null)) as
-      | { imageUrl?: string; label?: string; order?: number }
+      | { imageUrl?: string; label?: string; order?: number; zone?: string }
       | null;
 
     const imageUrl = body?.imageUrl?.trim();
     const label = body?.label?.trim() ?? "Gallery Image";
+    const zone = (body?.zone?.trim() as "restaurant" | "club" | "both") ?? "both";
     const order = body?.order;
 
     if (!imageUrl) {
       return NextResponse.json({ ok: false, error: "Image URL required" }, { status: 400 });
     }
 
-    const image = await addGalleryImage(imageUrl, label, order);
+    const image = await addGalleryImage(imageUrl, label, zone, order);
     return NextResponse.json({ ok: true, image });
   } catch (error) {
     return NextResponse.json(
@@ -51,7 +52,7 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   try {
     const body = (await req.json().catch(() => null)) as
-      | { id?: string; imageUrl?: string; label?: string; order?: number }
+      | { id?: string; imageUrl?: string; label?: string; order?: number; zone?: string }
       | null;
 
     const id = body?.id;
@@ -59,10 +60,11 @@ export async function PUT(req: Request) {
       return NextResponse.json({ ok: false, error: "Image ID required" }, { status: 400 });
     }
 
-    const updates: Partial<{ imageUrl: string; label: string; order: number }> = {};
+    const updates: Partial<{ imageUrl: string; label: string; order: number; zone: "restaurant" | "club" | "both" }> = {};
     if (body?.imageUrl) updates.imageUrl = body.imageUrl.trim();
     if (body?.label) updates.label = body.label.trim();
     if (typeof body?.order === "number") updates.order = body.order;
+    if (body?.zone) updates.zone = body.zone.trim() as "restaurant" | "club" | "both";
 
     const updated = await updateGalleryImage(id, updates);
     if (!updated) {
