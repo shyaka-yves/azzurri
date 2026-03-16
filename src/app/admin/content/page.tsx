@@ -977,6 +977,51 @@ export default function AdminContentPage() {
           </div>
         </div>
       </EditorCard>
+
+      <EditorCard title="Social Media Links">
+        <div className="space-y-6">
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Instagram (Restaurant)</p>
+              <input
+                type="text"
+                value={content.socialLinks?.instagramRestaurant || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, socialLinks: { ...c.socialLinks, instagramRestaurant: e.target.value } }))}
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Instagram (Club & Lounge)</p>
+              <input
+                type="text"
+                value={content.socialLinks?.instagramClub || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, socialLinks: { ...c.socialLinks, instagramClub: e.target.value } }))}
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">TikTok</p>
+              <input
+                type="text"
+                value={content.socialLinks?.tikTok || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, socialLinks: { ...c.socialLinks, tikTok: e.target.value } }))}
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Facebook</p>
+              <input
+                type="text"
+                value={content.socialLinks?.facebook || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, socialLinks: { ...c.socialLinks, facebook: e.target.value } }))}
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+          </div>
+        </div>
+      </EditorCard>
     </div>
   );
 }

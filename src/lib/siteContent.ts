@@ -106,6 +106,13 @@ export type SpecialOffersContent = {
   content: string;
 };
 
+export type SocialLinksContent = {
+  instagramRestaurant: string;
+  instagramClub: string;
+  tikTok: string;
+  facebook?: string;
+};
+
 export type SiteContent = {
   hero: HeroContent;
   about: AboutContent;
@@ -120,6 +127,7 @@ export type SiteContent = {
   menu: MenuContent;
   specialty: SpecialtyContent;
   specialOffers: SpecialOffersContent;
+  socialLinks: SocialLinksContent;
 };
 
 export type ReservationRecord = {
@@ -282,6 +290,12 @@ function getDefaultContent(): SiteContent {
       title: "Special offers",
       content: "",
     },
+    socialLinks: {
+      instagramRestaurant: "https://www.instagram.com/azzurri_rooftop_restaurant/",
+      instagramClub: "https://www.instagram.com/azzurri.rw/",
+      tikTok: "https://www.tiktok.com/@azzurri.rw",
+      facebook: "https://web.facebook.com/p/La-Creola-Restaurant-and-Lounge-61550407251686/",
+    },
   };
 }
 
@@ -318,6 +332,7 @@ export async function getSiteContent(): Promise<SiteContent> {
       menu: { ...defaults.menu, ...parsed.menu },
       specialty: { ...defaults.specialty, ...parsed.specialty },
       specialOffers: { ...defaults.specialOffers, ...parsed.specialOffers },
+      socialLinks: { ...defaults.socialLinks, ...parsed.socialLinks },
     };
   } catch (err) {
     console.error("Critical error in getSiteContent:", err);

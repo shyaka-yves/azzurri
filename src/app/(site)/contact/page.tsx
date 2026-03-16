@@ -55,6 +55,42 @@ export default async function ContactPage() {
                 <p className="whitespace-nowrap">{contact.email}</p>
               </div>
 
+              <div className="space-y-3">
+                <p className="text-sm font-medium text-[#D4AF37]">Social Media</p>
+                <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-zinc-300">
+                  {content.socialLinks?.instagramRestaurant && (
+                    <a
+                      href={content.socialLinks.instagramRestaurant}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-azzurri-blue transition-colors"
+                    >
+                      IG: Restaurant
+                    </a>
+                  )}
+                  {content.socialLinks?.instagramClub && (
+                    <a
+                      href={content.socialLinks.instagramClub}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-azzurri-blue transition-colors"
+                    >
+                      IG: Club & Lounge
+                    </a>
+                  )}
+                  {content.socialLinks?.tikTok && (
+                    <a
+                      href={content.socialLinks.tikTok}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-[#D4AF37] transition-colors"
+                    >
+                      TikTok
+                    </a>
+                  )}
+                </div>
+              </div>
+
               <div className="pt-2">
                 <div className="flex flex-col gap-4">
                   <a

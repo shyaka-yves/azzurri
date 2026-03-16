@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { getSiteContent } from "@/lib/siteContent";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const content = await getSiteContent();
+  const { socialLinks } = content;
+
   return (
     <footer className="border-t border-zinc-800 bg-black/95">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
@@ -41,37 +45,52 @@ export function SiteFooter() {
           </div>
 
           <div className="sm:col-span-1 sm:text-right">
-            <p className="text-sm font-semibold text-[#D4AF37]">Our Social Media Platforms</p>
-            <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-zinc-300 sm:justify-end">
-              <a
-                href="https://www.instagram.com/lacreola_kigali?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex py-2 hover:text-azzurri-blue transition-colors"
-                aria-label="Follow us on Instagram"
-              >
-                Instagram
-              </a>
-              <span className="h-1 w-1 rounded-full bg-zinc-600" />
-              <a
-                href="https://web.facebook.com/p/La-Creola-Restaurant-and-Lounge-61550407251686/?_rdc=1&_rdr#"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex py-2 hover:text-[#D4AF37] transition-colors"
-                aria-label="Follow us on Facebook"
-              >
-                Facebook
-              </a>
-              <span className="h-1 w-1 rounded-full bg-zinc-600" />
-              <a
-                href="https://www.tiktok.com/@lacreolakigali"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex py-2 hover:text-[#D4AF37] transition-colors"
-                aria-label="Follow us on TikTok"
-              >
-                TikTok
-              </a>
+            <p className="text-sm font-semibold text-[#D4AF37]">Follow Us</p>
+            <div className="mt-3 grid grid-cols-1 gap-2 text-sm text-zinc-300 sm:items-end">
+              {socialLinks.instagramRestaurant && (
+                <a
+                  href={socialLinks.instagramRestaurant}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-azzurri-blue transition-colors"
+                  aria-label="Follow Azzurri Restaurant on Instagram"
+                >
+                  IG: Restaurant
+                </a>
+              )}
+              {socialLinks.instagramClub && (
+                <a
+                  href={socialLinks.instagramClub}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-azzurri-blue transition-colors"
+                  aria-label="Follow Azzurri Club on Instagram"
+                >
+                  IG: Club & Lounge
+                </a>
+              )}
+              {socialLinks.tikTok && (
+                <a
+                  href={socialLinks.tikTok}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-[#D4AF37] transition-colors"
+                  aria-label="Follow us on TikTok"
+                >
+                  TikTok
+                </a>
+              )}
+              {socialLinks.facebook && (
+                <a
+                  href={socialLinks.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-[#D4AF37] transition-colors"
+                  aria-label="Follow us on Facebook"
+                >
+                  Facebook
+                </a>
+              )}
             </div>
           </div>
         </div>
