@@ -2,6 +2,8 @@ import { Suspense } from 'react';
 import { getSiteContent } from '@/lib/siteContent';
 import { BookingContent } from './BookingContent';
 
+export const dynamic = 'force-dynamic';
+
 export default async function BookPage() {
   const content = await getSiteContent();
 
