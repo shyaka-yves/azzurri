@@ -979,25 +979,88 @@ export default function AdminContentPage() {
       </EditorCard>
 
       <EditorCard title="Reservation Floor Plans">
-        <div className="space-y-6">
-          <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Club Floor Plan Image URL</p>
+        <div className="space-y-8">
+          {/* Club Floor Plan */}
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#D4AF37]">Club Floor Plan</p>
+            {content.reservations?.clubFloorPlanUrl && (
+              <div className="mb-3 flex items-center gap-3 rounded-xl border border-zinc-700/50 bg-black/40 p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={content.reservations.clubFloorPlanUrl} alt="Club floor plan preview" className="h-16 w-24 rounded-lg object-cover border border-zinc-700/50" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-zinc-300 truncate">{content.reservations.clubFloorPlanUrl}</p>
+                </div>
+                <button type="button" onClick={() => setContent((c: any) => ({ ...c, reservations: { ...c.reservations, clubFloorPlanUrl: "" } }))} className="rounded-full border border-red-500/30 px-3 py-1 text-[10px] text-red-300 hover:border-red-400/50">Remove</button>
+              </div>
+            )}
+            <p className="mb-2 text-[10px] uppercase tracking-widest text-zinc-500">Pick from Media Library</p>
+            <div className="grid max-h-48 grid-cols-4 gap-2 overflow-y-auto rounded-xl border border-zinc-800 bg-black/20 p-2 md:grid-cols-6">
+              {imageOptions.length === 0 ? (
+                <p className="col-span-full py-4 text-center text-xs text-zinc-500">No images in Media Library yet.</p>
+              ) : (
+                imageOptions.map((img) => (
+                  <button
+                    key={img.name}
+                    type="button"
+                    onClick={() => setContent((c: any) => ({ ...c, reservations: { ...c.reservations, clubFloorPlanUrl: img.url } }))}
+                    className={`relative h-16 overflow-hidden rounded-lg border-2 transition ${content.reservations?.clubFloorPlanUrl === img.url ? "border-[#D4AF37]" : "border-zinc-700/50 hover:border-zinc-500"}`}
+                    title={img.name}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={img.url} alt={img.name} className="h-full w-full object-cover" />
+                  </button>
+                ))
+              )}
+            </div>
+            <p className="mt-2 text-[10px] text-zinc-500">Or paste a URL manually:</p>
             <input
               type="text"
               value={content.reservations?.clubFloorPlanUrl || ""}
               onChange={(e) => setContent((c: any) => ({ ...c, reservations: { ...c.reservations, clubFloorPlanUrl: e.target.value } }))}
-              placeholder="e.g. /floorplan-club.png or https://..."
-              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              placeholder="https://... or /uploads/floorplan-club.png"
+              className="mt-1 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
             />
           </div>
-          <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Restaurant Floor Plan Image URL (Optional)</p>
+
+          {/* Restaurant Floor Plan */}
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#D4AF37]">Restaurant Floor Plan <span className="text-zinc-500 font-normal normal-case tracking-normal">(Optional)</span></p>
+            {content.reservations?.restaurantFloorPlanUrl && (
+              <div className="mb-3 flex items-center gap-3 rounded-xl border border-zinc-700/50 bg-black/40 p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={content.reservations.restaurantFloorPlanUrl} alt="Restaurant floor plan preview" className="h-16 w-24 rounded-lg object-cover border border-zinc-700/50" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-zinc-300 truncate">{content.reservations.restaurantFloorPlanUrl}</p>
+                </div>
+                <button type="button" onClick={() => setContent((c: any) => ({ ...c, reservations: { ...c.reservations, restaurantFloorPlanUrl: "" } }))} className="rounded-full border border-red-500/30 px-3 py-1 text-[10px] text-red-300 hover:border-red-400/50">Remove</button>
+              </div>
+            )}
+            <p className="mb-2 text-[10px] uppercase tracking-widest text-zinc-500">Pick from Media Library</p>
+            <div className="grid max-h-48 grid-cols-4 gap-2 overflow-y-auto rounded-xl border border-zinc-800 bg-black/20 p-2 md:grid-cols-6">
+              {imageOptions.length === 0 ? (
+                <p className="col-span-full py-4 text-center text-xs text-zinc-500">No images in Media Library yet.</p>
+              ) : (
+                imageOptions.map((img) => (
+                  <button
+                    key={img.name}
+                    type="button"
+                    onClick={() => setContent((c: any) => ({ ...c, reservations: { ...c.reservations, restaurantFloorPlanUrl: img.url } }))}
+                    className={`relative h-16 overflow-hidden rounded-lg border-2 transition ${content.reservations?.restaurantFloorPlanUrl === img.url ? "border-[#D4AF37]" : "border-zinc-700/50 hover:border-zinc-500"}`}
+                    title={img.name}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={img.url} alt={img.name} className="h-full w-full object-cover" />
+                  </button>
+                ))
+              )}
+            </div>
+            <p className="mt-2 text-[10px] text-zinc-500">Or paste a URL manually:</p>
             <input
               type="text"
               value={content.reservations?.restaurantFloorPlanUrl || ""}
               onChange={(e) => setContent((c: any) => ({ ...c, reservations: { ...c.reservations, restaurantFloorPlanUrl: e.target.value } }))}
-              placeholder="e.g. /floorplan-restaurant.png or https://..."
-              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              placeholder="https://... or /uploads/floorplan-restaurant.png"
+              className="mt-1 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
             />
           </div>
         </div>

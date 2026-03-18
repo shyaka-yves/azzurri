@@ -4,7 +4,6 @@ import { useSearchParams } from 'next/navigation';
 import { useMemo, useState, useEffect } from 'react';
 import { ZoneSelector } from '@/components/ZoneSelector';
 import { FadeIn } from '@/components/FadeIn';
-import Image from 'next/image';
 import type { SiteContent } from '@/lib/siteContent';
 
 function getMinDateTimeValue(): string {
@@ -129,19 +128,25 @@ export function BookingContent({ content }: { content: SiteContent }) {
                 Please select your preferred area (Minimum spend applies)
               </p>
 
-              {content.reservations?.clubFloorPlanUrl && (
+              {content.reservations?.clubFloorPlanUrl ? (
                 <div className="mb-8 overflow-hidden rounded-2xl border border-zinc-700/50 bg-black/40">
                   <div className="relative aspect-[16/9] w-full">
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={content.reservations.clubFloorPlanUrl}
                       alt="Club Floor Plan"
-                      fill
-                      className="object-contain p-2"
+                      className="h-full w-full object-contain p-2"
                     />
                   </div>
                   <div className="bg-zinc-800/30 px-4 py-2 text-center text-[10px] text-zinc-500 uppercase tracking-wider">
                     Club Floor Plan Reference
                   </div>
+                </div>
+              ) : (
+                <div className="mb-8 flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-zinc-700/60 bg-black/20 py-10 text-center">
+                  <svg className="h-8 w-8 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                  <p className="text-xs text-zinc-500">Floor plan coming soon.</p>
+                  <p className="text-[10px] text-zinc-600">Upload one via Admin → Content Management → Reservation Floor Plans.</p>
                 </div>
               )}
 
