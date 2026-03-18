@@ -214,8 +214,12 @@ export default function AdminReservationsPage() {
                         ) : null}
                       </td>
                       <td className="px-4 py-3">
-                        <span className="inline-flex rounded-md bg-zinc-800/50 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-300">
-                          {r.zone || "Restaurant"}
+                        <span className={`inline-flex rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-wider ${
+                          r.zone === "club" 
+                            ? "bg-blue-500/10 text-blue-300 border border-blue-500/30" 
+                            : "bg-[#D4AF37]/10 text-[#D4AF37] border border-[#D4AF37]/30"
+                        }`}>
+                          {r.zone === "club" ? "Club & Lounge" : "Restaurant"}
                         </span>
                       </td>
                       <td className="px-4 py-3 text-xs">{r.date || "—"}</td>

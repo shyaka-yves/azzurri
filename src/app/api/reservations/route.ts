@@ -20,9 +20,10 @@ async function sendReservationEmail(record: ReservationRecord) {
     `Name: ${record.name}`,
     `Email: ${record.email}`,
     record.phone ? `Phone: ${record.phone}` : null,
+    `Area: ${record.zone === "club" ? "Club & Lounge" : "Rooftop Restaurant"}`,
     record.date ? `Date & Time: ${record.date}` : null,
     record.guests ? `Guests: ${record.guests}` : null,
-    record.tableType ? `Table Area: ${record.tableType}` : null,
+    record.tableType ? `Table Area/Type: ${record.tableType}` : null,
     record.notes ? `Notes:\n${record.notes}` : null,
   ].filter(Boolean);
 

@@ -106,6 +106,11 @@ export type SpecialOffersContent = {
   content: string;
 };
 
+export type ReservationsContent = {
+  clubFloorPlanUrl: string;
+  restaurantFloorPlanUrl?: string;
+};
+
 export type SocialLinksContent = {
   instagramRestaurant: string;
   instagramClub: string;
@@ -128,6 +133,7 @@ export type SiteContent = {
   specialty: SpecialtyContent;
   specialOffers: SpecialOffersContent;
   socialLinks: SocialLinksContent;
+  reservations: ReservationsContent;
 };
 
 export type ReservationRecord = {
@@ -296,6 +302,10 @@ function getDefaultContent(): SiteContent {
       tikTok: "https://www.tiktok.com/@azzurri.rw",
       facebook: "https://web.facebook.com/p/La-Creola-Restaurant-and-Lounge-61550407251686/",
     },
+    reservations: {
+      clubFloorPlanUrl: "",
+      restaurantFloorPlanUrl: "",
+    },
   };
 }
 
@@ -333,6 +343,7 @@ export async function getSiteContent(): Promise<SiteContent> {
       specialty: { ...defaults.specialty, ...parsed.specialty },
       specialOffers: { ...defaults.specialOffers, ...parsed.specialOffers },
       socialLinks: { ...defaults.socialLinks, ...parsed.socialLinks },
+      reservations: { ...defaults.reservations, ...parsed.reservations },
     };
   } catch (err) {
     console.error("Critical error in getSiteContent:", err);

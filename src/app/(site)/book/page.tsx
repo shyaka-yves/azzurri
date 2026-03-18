@@ -1,9 +1,9 @@
-'use client';
-
 import { useSearchParams } from 'next/navigation';
 import { useMemo, useState, useEffect, Suspense } from 'react';
 import { ZoneSelector } from '@/components/ZoneSelector';
 import { FadeIn } from '@/components/FadeIn';
+import { getSiteContent, type SiteContent } from '@/lib/siteContent';
+import Image from 'next/image';
 
 function getMinDateTimeValue(): string {
   const now = new Date();
@@ -15,19 +15,23 @@ function getMinDateTimeValue(): string {
   return iso.slice(0, 16); // yyyy-MM-ddTHH:mm
 }
 
-export default function BookPage() {
+export default async function BookPage() {
+  const content = await getSiteContent();
+
   return (
     <Suspense fallback={
       <main className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-[#D4AF37] animate-pulse">Loading Booking Form...</div>
       </main>
     }>
-      <BookingContent />
+      <BookingContent content={content} />
     </Suspense>
   );
 }
 
-function BookingContent() {
+'use client';
+
+function BookingContent({ content }: { content: SiteContent }) {
   const minDateTime = useMemo(getMinDateTimeValue, []);
   const searchParams = useSearchParams();
   
@@ -138,6 +142,22 @@ function BookingContent() {
               <p className="mb-6 text-xs text-zinc-400 uppercase tracking-widest">
                 Please select your preferred area (Minimum spend applies)
               </p>
+
+              {content.reservations?.clubFloorPlanUrl && (
+                <div className="mb-8 overflow-hidden rounded-2xl border border-zinc-700/50 bg-black/40">
+                  <div className="relative aspect-[16/9] w-full">
+                    <Image
+                      src={content.reservations.clubFloorPlanUrl}
+                      alt="Club Floor Plan"
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
+                  <div className="bg-zinc-800/30 px-4 py-2 text-center text-[10px] text-zinc-500 uppercase tracking-wider">
+                    Club Floor Plan Reference
+                  </div>
+                </div>
+              )}
               
               <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
                 {[

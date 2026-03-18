@@ -978,6 +978,31 @@ export default function AdminContentPage() {
         </div>
       </EditorCard>
 
+      <EditorCard title="Reservation Floor Plans">
+        <div className="space-y-6">
+          <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Club Floor Plan Image URL</p>
+            <input
+              type="text"
+              value={content.reservations?.clubFloorPlanUrl || ""}
+              onChange={(e) => setContent((c: any) => ({ ...c, reservations: { ...c.reservations, clubFloorPlanUrl: e.target.value } }))}
+              placeholder="e.g. /floorplan-club.png or https://..."
+              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+            />
+          </div>
+          <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Restaurant Floor Plan Image URL (Optional)</p>
+            <input
+              type="text"
+              value={content.reservations?.restaurantFloorPlanUrl || ""}
+              onChange={(e) => setContent((c: any) => ({ ...c, reservations: { ...c.reservations, restaurantFloorPlanUrl: e.target.value } }))}
+              placeholder="e.g. /floorplan-restaurant.png or https://..."
+              className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+            />
+          </div>
+        </div>
+      </EditorCard>
+
       <EditorCard title="Social Media Links">
         <div className="space-y-6">
           <div className="grid gap-4 md:grid-cols-2">
