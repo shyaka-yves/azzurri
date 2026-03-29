@@ -242,6 +242,106 @@ export default function AdminContentPage() {
         </div>
       </EditorCard>
 
+      <EditorCard title="Club Page Content">
+        <div className="space-y-8">
+          <div className="space-y-4">
+            <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-[#D4AF37]">Hero Section</h3>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Headline</p>
+                <input
+                  type="text"
+                  value={content.clubPage?.hero?.title || ""}
+                  onChange={(e) => setContent((c: any) => ({ ...c, clubPage: { ...c.clubPage, hero: { ...c.clubPage?.hero, title: e.target.value } } }))}
+                  className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+                />
+              </div>
+              <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Tagline</p>
+                <input
+                  type="text"
+                  value={content.clubPage?.hero?.tagline || ""}
+                  onChange={(e) => setContent((c: any) => ({ ...c, clubPage: { ...c.clubPage, hero: { ...c.clubPage?.hero, tagline: e.target.value } } }))}
+                  className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+                />
+              </div>
+            </div>
+            <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+              <Select
+                label="Choose Hero Image"
+                value={content.clubPage?.hero?.imageSrc || ""}
+                options={[
+                  { label: "— Select —", value: "" },
+                  ...imageOptions.map((m) => ({ label: m.name, value: m.url })),
+                ]}
+                onChange={(v) =>
+                  setContent((c: any) => ({ ...c, clubPage: { ...c.clubPage, hero: { ...c.clubPage?.hero, imageSrc: v } } }))
+                }
+              />
+              <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Or paste image URL</p>
+                <input
+                  type="text"
+                  value={content.clubPage?.hero?.imageSrc || ""}
+                  onChange={(e) => setContent((c: any) => ({ ...c, clubPage: { ...c.clubPage, hero: { ...c.clubPage?.hero, imageSrc: e.target.value } } }))}
+                  className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4 pt-6 border-t border-zinc-800">
+            <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-[#D4AF37]">About Section</h3>
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Title</p>
+              <input
+                type="text"
+                value={content.clubPage?.about?.title || ""}
+                onChange={(e) => setContent((c: any) => ({ ...c, clubPage: { ...c.clubPage, about: { ...c.clubPage?.about, title: e.target.value } } }))}
+                className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+              />
+            </div>
+            {(content.clubPage?.about?.paragraphs || []).map((p: string, i: number) => (
+              <div key={i} className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Paragraph {i + 1}</p>
+                <textarea
+                  value={p}
+                  onChange={(e) => setContent((c: any) => {
+                    const paras = [...(c.clubPage.about.paragraphs || [])];
+                    paras[i] = e.target.value;
+                    return { ...c, clubPage: { ...c.clubPage, about: { ...c.clubPage.about, paragraphs: paras } } };
+                  })}
+                  rows={3}
+                  className="mt-2 w-full rounded-xl border border-zinc-700/80 bg-black/70 p-3 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+                />
+              </div>
+            ))}
+            <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+              <Select
+                label="Choose About Image"
+                value={content.clubPage?.about?.imageSrc || ""}
+                options={[
+                  { label: "— Select —", value: "" },
+                  ...imageOptions.map((m) => ({ label: m.name, value: m.url })),
+                ]}
+                onChange={(v) =>
+                  setContent((c: any) => ({ ...c, clubPage: { ...c.clubPage, about: { ...c.clubPage?.about, imageSrc: v } } }))
+                }
+              />
+              <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-400">Or paste image URL</p>
+                <input
+                  type="text"
+                  value={content.clubPage?.about?.imageSrc || ""}
+                  onChange={(e) => setContent((c: any) => ({ ...c, clubPage: { ...c.clubPage, about: { ...c.clubPage?.about, imageSrc: e.target.value } } }))}
+                  className="mt-2 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </EditorCard>
+
       <EditorCard title="About Azzurri">
         <div className="space-y-6">
           <div className="grid gap-4 md:grid-cols-2">
@@ -1062,6 +1162,62 @@ export default function AdminContentPage() {
               placeholder="https://... or /uploads/floorplan-restaurant.png"
               className="mt-1 h-10 w-full rounded-full border border-zinc-700/80 bg-black/70 px-4 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
             />
+          </div>
+
+          {/* Club Table Details */}
+          <div className="pt-8 border-t border-zinc-800">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-[#D4AF37]">Club Table Details</p>
+            <div className="grid gap-6">
+              {(content.reservations?.clubTableDetails || []).map((t: any, i: number) => (
+                <div key={t.id} className="rounded-2xl border border-zinc-800 bg-black/40 p-5 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-bold text-white">{t.label}</p>
+                    <p className="text-[10px] text-zinc-500 font-mono uppercase">{t.id}</p>
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="space-y-1">
+                      <p className="text-[10px] uppercase tracking-wider text-zinc-500">Pax / Capacity</p>
+                      <input
+                        type="text"
+                        value={t.pax || ""}
+                        onChange={(e) => setContent((c: any) => {
+                          const details = [...(c.reservations.clubTableDetails || [])];
+                          details[i] = { ...details[i], pax: e.target.value };
+                          return { ...c, reservations: { ...c.reservations, clubTableDetails: details } };
+                        })}
+                        className="h-9 w-full rounded-lg border border-zinc-700/80 bg-black/70 px-3 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-[10px] uppercase tracking-wider text-zinc-500">Minimum Spend</p>
+                      <input
+                        type="text"
+                        value={t.minSpend || ""}
+                        onChange={(e) => setContent((c: any) => {
+                          const details = [...(c.reservations.clubTableDetails || [])];
+                          details[i] = { ...details[i], minSpend: e.target.value };
+                          return { ...c, reservations: { ...c.reservations, clubTableDetails: details } };
+                        })}
+                        className="h-9 w-full rounded-lg border border-zinc-700/80 bg-black/70 px-3 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-[10px] uppercase tracking-wider text-zinc-500">Detailed Description</p>
+                    <textarea
+                      value={t.description || ""}
+                      onChange={(e) => setContent((c: any) => {
+                        const details = [...(c.reservations.clubTableDetails || [])];
+                        details[i] = { ...details[i], description: e.target.value };
+                        return { ...c, reservations: { ...c.reservations, clubTableDetails: details } };
+                      })}
+                      rows={2}
+                      className="w-full rounded-lg border border-zinc-700/80 bg-black/70 p-3 text-sm text-zinc-100 focus:border-[#D4AF37] focus:outline-none"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </EditorCard>

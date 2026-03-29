@@ -118,6 +118,27 @@ export type SocialLinksContent = {
   facebook?: string;
 };
 
+export type ClubPageContent = {
+  hero: {
+    title: string;
+    tagline: string;
+    imageSrc: string;
+  };
+  about: {
+    title: string;
+    paragraphs: string[];
+    imageSrc: string;
+  };
+};
+
+export type TableDetail = {
+  id: string;
+  label: string;
+  pax: string;
+  minSpend: string;
+  description: string;
+};
+
 export type SiteContent = {
   hero: HeroContent;
   about: AboutContent;
@@ -133,7 +154,8 @@ export type SiteContent = {
   specialty: SpecialtyContent;
   specialOffers: SpecialOffersContent;
   socialLinks: SocialLinksContent;
-  reservations: ReservationsContent;
+  reservations: ReservationsContent & { clubTableDetails?: TableDetail[] };
+  clubPage?: ClubPageContent;
 };
 
 export type ReservationRecord = {
@@ -305,7 +327,28 @@ function getDefaultContent(): SiteContent {
     reservations: {
       clubFloorPlanUrl: "",
       restaurantFloorPlanUrl: "",
+      clubTableDetails: [
+        { id: 'cigar', label: 'Cigar Lounge', pax: '15 pax', minSpend: '2,500,000 RWF', description: 'Our exclusive Cigar Lounge offers a sophisticated atmosphere with premium leather seating and a curated selection of world-class cigars.' },
+        { id: 'top-vvip', label: 'Top VVIP', pax: '6-8 pax', minSpend: '1,500,000 RWF', description: 'The absolute pinnacle of luxury at Azzurri. Elevated views of the entire club with dedicated service and premium placement.' },
+        { id: 'vvip', label: 'VVIP', pax: '10-12 pax', minSpend: '1,000,000 RWF', description: 'Spacious areas designed for larger groups seeking an elite experience with a prime view of the DJ booth.' },
+        { id: 'vip', label: 'VIP', pax: '5-10 pax', minSpend: '800,000 RWF', description: 'Perfect for smaller groups wanting to be in the heart of the action while maintaining an exclusive private space.' },
+      ],
     },
+    clubPage: {
+      hero: {
+        title: "Azzurri Club & Lounge",
+        tagline: "The rhythm of Kigali nights",
+        imageSrc: "/uploads/FRIDAYYY.png",
+      },
+      about: {
+        title: "Elevate Your Night",
+        paragraphs: [
+          "Step into a world where premium nightlife meets unparalleled energy. Azzurri Club & Lounge is the ultimate destination for those who seek the extraordinary.",
+          "With world-class DJs, exclusive VIP areas, and signature cocktails crafted by expert mixologists, every night is a celebration. Whether you're here for an after-party, a special celebration, or to dance until dawn, we provide the perfect ambiance under the Kigali sky."
+        ],
+        imageSrc: "/uploads/event-2.jpg",
+      }
+    }
   };
 }
 
@@ -344,6 +387,10 @@ export async function getSiteContent(): Promise<SiteContent> {
       specialOffers: { ...defaults.specialOffers, ...parsed.specialOffers },
       socialLinks: { ...defaults.socialLinks, ...parsed.socialLinks },
       reservations: { ...defaults.reservations, ...parsed.reservations },
+      clubPage: parsed.clubPage ? {
+        hero: { ...defaults.clubPage!.hero, ...parsed.clubPage.hero },
+        about: { ...defaults.clubPage!.about, ...parsed.clubPage.about },
+      } : defaults.clubPage,
     };
   } catch (err) {
     console.error("Critical error in getSiteContent:", err);

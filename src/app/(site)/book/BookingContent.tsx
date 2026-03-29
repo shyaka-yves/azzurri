@@ -39,6 +39,8 @@ export function BookingContent({ content }: { content: SiteContent }) {
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [expandedImage, setExpandedImage] = useState<string | null>(null);
+  const [selectedTableDetail, setSelectedTableDetail] = useState<any>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -129,14 +131,22 @@ export function BookingContent({ content }: { content: SiteContent }) {
               </p>
 
               {content.reservations?.clubFloorPlanUrl ? (
-                <div className="mb-8 overflow-hidden rounded-2xl border border-zinc-700/50 bg-black/40">
+                <div 
+                  className="group relative mb-8 cursor-zoom-in overflow-hidden rounded-2xl border border-zinc-700/50 bg-black/40 transition-all hover:border-azzurri-blue/50"
+                  onClick={() => setExpandedImage(content.reservations.clubFloorPlanUrl)}
+                >
                   <div className="relative aspect-[16/9] w-full">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={content.reservations.clubFloorPlanUrl}
                       alt="Club Floor Plan"
-                      className="h-full w-full object-contain p-2"
+                      className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-[1.02]"
                     />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/20">
+                      <span className="rounded-full bg-black/60 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white opacity-0 transition-opacity group-hover:opacity-100">
+                        Click to enlarge
+                      </span>
+                    </div>
                   </div>
                   <div className="bg-zinc-800/30 px-4 py-2 text-center text-[10px] text-zinc-500 uppercase tracking-wider">
                     Club Floor Plan Reference
@@ -151,31 +161,45 @@ export function BookingContent({ content }: { content: SiteContent }) {
               )}
 
               <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-                {[
+                {(content.reservations?.clubTableDetails || [
                   { id: 'cigar', label: 'Cigar Lounge', pax: '15 pax', minSpend: '2,500,000 RWF' },
                   { id: 'top-vvip', label: 'Top VVIP', pax: '6-8 pax', minSpend: '1,500,000 RWF' },
                   { id: 'vvip', label: 'VVIP', pax: '10-12 pax', minSpend: '1,000,000 RWF' },
                   { id: 'vip', label: 'VIP', pax: '5-10 pax', minSpend: '800,000 RWF' },
-                ].map((t) => (
-                  <button
-                    key={t.id}
-                    type="button"
-                    onClick={() => setTableType(t.label)}
-                    className={`flex flex-col items-center justify-center gap-1 rounded-2xl border p-4 transition-all ${
-                      tableType === t.label
-                        ? 'border-azzurri-blue bg-azzurri-blue/10'
-                        : 'border-zinc-800 bg-black/40 hover:border-zinc-700'
-                    }`}
-                  >
-                    <span className={`text-sm font-bold ${tableType === t.label ? 'text-white' : 'text-zinc-300'}`}>
-                      {t.label}
-                    </span>
-                    <span className="text-[10px] text-zinc-500">{t.pax}</span>
-                    <div className="mt-2 h-px w-8 bg-zinc-800" />
-                    <span className="mt-1 text-[11px] font-medium text-[#D4AF37]">
-                      {t.minSpend}
-                    </span>
-                  </button>
+                ]).map((t: any) => (
+                  <div key={t.id} className="relative group">
+                    <button
+                      type="button"
+                      onClick={() => setTableType(t.label)}
+                      className={`flex w-full flex-col items-center justify-center gap-1 rounded-2xl border p-4 transition-all ${
+                        tableType === t.label
+                          ? 'border-azzurri-blue bg-azzurri-blue/10'
+                          : 'border-zinc-800 bg-black/40 hover:border-zinc-700'
+                      }`}
+                    >
+                      <span className={`text-sm font-bold ${tableType === t.label ? 'text-white' : 'text-zinc-300'}`}>
+                        {t.label}
+                      </span>
+                      <span className="text-[10px] text-zinc-500">{t.pax}</span>
+                      <div className="mt-2 h-px w-8 bg-zinc-800" />
+                      <span className="mt-1 text-[11px] font-medium text-[#D4AF37]">
+                        {t.minSpend}
+                      </span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedTableDetail(t);
+                      }}
+                      className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-zinc-800/50 text-zinc-400 opacity-0 transition-opacity hover:bg-[#D4AF37]/20 hover:text-[#D4AF37] group-hover:opacity-100"
+                      title="View Details"
+                    >
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 18 18 0 0118 0z" />
+                      </svg>
+                    </button>
+                  </div>
                 ))}
               </div>
 
@@ -309,6 +333,88 @@ export function BookingContent({ content }: { content: SiteContent }) {
           )}
         </form>
       </div>
+
+      {/* Lightbox for Floor Plan */}
+      {expandedImage && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 backdrop-blur-sm animate-in fade-in duration-300"
+          onClick={() => setExpandedImage(null)}
+        >
+          <button className="absolute right-6 top-6 text-white/50 hover:text-white transition-colors">
+            <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+          <div 
+            className="relative h-full w-full max-w-6xl max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={expandedImage}
+              alt="Expanded Floor Plan"
+              className="h-full w-full object-contain"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Table Detail Modal */}
+      {selectedTableDetail && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md animate-in fade-in zoom-in duration-300"
+          onClick={() => setSelectedTableDetail(null)}
+        >
+          <div 
+            className="w-full max-w-lg overflow-hidden rounded-[2.5rem] border border-zinc-800 bg-zinc-950 p-8 shadow-2xl lg:p-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-[#D4AF37]">Table Details</p>
+                <h3 className="heading-font mt-2 text-3xl font-bold text-white">{selectedTableDetail.label}</h3>
+              </div>
+              <button 
+                onClick={() => setSelectedTableDetail(null)}
+                className="rounded-full border border-zinc-800 p-2 text-zinc-500 transition-colors hover:bg-white/5 hover:text-white"
+              >
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+
+            <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="rounded-2xl border border-zinc-800/50 bg-white/5 p-4">
+                <p className="text-[10px] uppercase tracking-wider text-zinc-500">Capacity</p>
+                <p className="mt-1 text-sm font-semibold text-white">{selectedTableDetail.pax}</p>
+              </div>
+              <div className="rounded-2xl border border-zinc-800/50 bg-white/5 p-4">
+                <p className="text-[10px] uppercase tracking-wider text-zinc-500">Min. Spend</p>
+                <p className="mt-1 text-sm font-semibold text-[#D4AF37]">{selectedTableDetail.minSpend}</p>
+              </div>
+            </div>
+
+            <div className="mt-6 space-y-4">
+              <p className="text-sm font-light leading-relaxed text-zinc-300">
+                {selectedTableDetail.description || 'Exclusive seating area with premium views and dedicated service.'}
+              </p>
+            </div>
+
+            <div className="mt-10">
+              <button
+                onClick={() => {
+                  setTableType(selectedTableDetail.label);
+                  setSelectedTableDetail(null);
+                }}
+                className={`w-full rounded-2xl py-4 text-xs font-bold uppercase tracking-[0.2em] transition-all ${
+                  tableType === selectedTableDetail.label
+                    ? 'bg-zinc-800 text-zinc-400 cursor-default'
+                    : 'bg-[#D4AF37] text-black hover:brightness-110 active:scale-[0.98]'
+                }`}
+              >
+                {tableType === selectedTableDetail.label ? 'Selected' : 'Select this area'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
