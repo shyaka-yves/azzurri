@@ -42,7 +42,7 @@ export default async function ClubPage() {
             </h1>
           </FadeIn>
           <FadeIn delay={120}>
-            <p className="mt-6 max-w-2xl text-sm font-light uppercase tracking-[0.3em] text-zinc-300 md:text-base">
+            <p className="mt-6 max-w-2xl text-sm font-light uppercase tracking-[0.3em] text-zinc-100 md:text-base">
               {content.clubPage?.hero?.tagline || "The rhythm of Kigali nights"}
             </p>
           </FadeIn>
