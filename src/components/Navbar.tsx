@@ -55,6 +55,9 @@ export function Navbar() {
               onError={() => setLogoError(true)}
             />
           )}
+          <span className="ml-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[#D4AF37] sm:ml-4 sm:text-xs">
+            By La Creola
+          </span>
         </Link>
 
         <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-[13px] uppercase tracking-widest text-zinc-400 lg:flex xl:gap-10">
