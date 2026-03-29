@@ -10,9 +10,10 @@ import type { Event } from "@/lib/eventsDb";
 interface EventsViewProps {
   events: Event[];
   zone?: 'restaurant' | 'club';
+  hideZoneSelector?: boolean;
 }
 
-export function EventsView({ events, zone = 'restaurant' }: EventsViewProps) {
+export function EventsView({ events, zone = 'restaurant', hideZoneSelector = false }: EventsViewProps) {
   const searchParams = useSearchParams();
   const [activeZone, setActiveZone] = useState<'restaurant' | 'club'>(zone);
 
@@ -42,7 +43,9 @@ export function EventsView({ events, zone = 'restaurant' }: EventsViewProps) {
 
       <section className="py-12 sm:py-16 bg-gradient-to-b from-black via-slate-950 to-black">
         <div className="mx-auto max-w-6xl px-4">
-          <ZoneSelector defaultZone={activeZone} onZoneChange={setActiveZone} />
+          {!hideZoneSelector && (
+            <ZoneSelector defaultZone={activeZone} onZoneChange={setActiveZone} />
+          )}
 
           {filteredEvents.length === 0 ? (
             <div className="text-center py-24">

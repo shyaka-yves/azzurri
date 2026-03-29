@@ -8,6 +8,7 @@ const RESTAURANT_DROPDOWN = [
   { href: "/menu", label: "Menu" },
   { href: "/special-offers", label: "Special offers" },
   { href: "/speciality", label: "Speciality" },
+  { href: "/events", label: "Events" },
 ];
 
 
@@ -86,7 +87,7 @@ export function Navbar() {
             )}
           </div>
 
-          <Link href="/events" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">EVENTS</Link>
+          <Link href="/club" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">CLUB</Link>
           <Link href="/gallery" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">GALLERY</Link>
           <Link href="/contact" className="whitespace-nowrap transition-colors hover:text-azzurri-blue">CONTACT</Link>
         </nav>
@@ -133,7 +134,7 @@ export function Navbar() {
             ))}
           </div>
 
-          <Link href="/events" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">EVENTS</Link>
+          <Link href="/club" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">CLUB</Link>
           <Link href="/gallery" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">GALLERY</Link>
 
           <Link href="/contact" onClick={() => setMobileOpen(false)} className="border-b border-zinc-800 py-4 text-sm uppercase tracking-wide text-white transition-colors hover:text-azzurri-blue">CONTACT</Link>
