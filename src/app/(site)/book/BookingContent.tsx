@@ -195,8 +195,18 @@ export function BookingContent({ content }: { content: SiteContent }) {
                       className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#D4AF37]/10 text-[#D4AF37] ring-1 ring-[#D4AF37]/30 transition-all hover:bg-[#D4AF37]/20 hover:scale-110 active:scale-95 z-10"
                       title="View Details"
                     >
-                      <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 18 18 0 0118 0z" />
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="h-3 w-3"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
                       </svg>
                     </button>
                   </div>
