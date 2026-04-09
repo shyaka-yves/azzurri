@@ -13,7 +13,7 @@ async function sendReservationEmail(record: ReservationRecord) {
     return;
   }
 
-  const from = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+  const from = process.env.RESEND_FROM_EMAIL || "Azzurri Website <onboarding@resend.dev>";
   const resend = new Resend(apiKey);
 
   const lines = [
