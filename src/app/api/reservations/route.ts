@@ -13,7 +13,7 @@ async function sendReservationEmail(record: ReservationRecord) {
     return;
   }
 
-  const from = process.env.RESEND_FROM_EMAIL || "Azzurri Website <onboarding@resend.dev>";
+  const from = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
   const resend = new Resend(apiKey);
 
   const lines = [
@@ -94,20 +94,29 @@ export async function POST(req: Request) {
     normalizedDate = requested.toISOString();
   }
 
-  const record = await addReservation({
-    name,
-    email,
-    phone: phone || undefined,
-    date: normalizedDate ?? (date || undefined),
-    guests: Number.isFinite(guests) && guests > 0 ? guests : undefined,
-    notes: notes || undefined,
-    status: "new",
-    zone,
-    tableType: tableType || undefined,
-  });
+  let record: ReservationRecord;
+  try {
+    record = await addReservation({
+      name,
+      email,
+      phone: phone || undefined,
+      date: normalizedDate ?? (date || undefined),
+      guests: Number.isFinite(guests) && guests > 0 ? guests : undefined,
+      notes: notes || undefined,
+      status: "new",
+      zone,
+      tableType: tableType || undefined,
+    });
+  } catch (err) {
+    console.error("[Reservations] Database insert failed:", err instanceof Error ? err.message : err);
+    return NextResponse.json(
+      { ok: false, error: "Failed to save reservation. Please try again later." },
+      { status: 500 }
+    );
+  }
 
   try {
-    console.log("[Reservations] Attempting to send email via Brevo to:", RESERVATIONS_EMAIL);
+    console.log("[Reservations] Attempting to send email via Resend to:", RESERVATIONS_EMAIL);
     await sendReservationEmail(record);
     console.log("[Reservations] Email sent successfully");
   } catch (err) {
