@@ -135,34 +135,38 @@ export default async function Home() {
             <div className="h-0.5 w-12 bg-[#EFD077] mx-auto mt-8" />
           </FadeIn>
 
-          <div className="mt-10 grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {displayEvents.map((event, index) => (
               <FadeIn key={index} delay={80 * index}>
-                <article className="card-glass flex h-full flex-col overflow-hidden rounded-2xl border-white/5 transition hover:-translate-y-1">
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-[#030712] border border-white/5 transition-all hover:border-white/10 group">
+                  <div className="relative aspect-square overflow-hidden bg-zinc-900">
                     <Image
                       src={event.imageSrc}
                       alt={event.title}
                       fill
-                      className="object-contain transition-transform duration-700 hover:scale-105 bg-black/40"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#030712] to-transparent" />
                   </div>
-                  <div className="flex flex-1 flex-col px-6 pb-10 pt-8">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4AF37]">
+                  <div className="flex flex-1 flex-col px-7 pb-10 pt-4">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#EFD077]">
                       {event.date}
                     </p>
-                    <h3 className="mt-4 text-2xl font-medium tracking-tight text-white group-hover:text-azzurri-blue transition-colors">
+                    <h3 className="mt-4 text-2xl font-medium tracking-normal text-white">
                       {event.title}
                     </h3>
-                    <p className="mt-4 text-sm leading-relaxed text-zinc-400 font-light lg:text-base">{event.description}</p>
-                    <Link
-                      href={event.href}
-                      className="mt-10 inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-azzurri-blue to-[#137d91] px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-black shadow-xl shadow-blue-500/10 hover:brightness-110 active:scale-95 transition-all"
-                      aria-label={`Learn more about ${event.title}`}
-                    >
-                      Learn More
-                    </Link>
+                    <p className="mt-4 text-sm leading-relaxed text-zinc-400 font-light line-clamp-2">
+                      {event.description}
+                    </p>
+                    <div className="mt-auto pt-10">
+                      <Link
+                        href={event.href}
+                        className="inline-flex h-11 items-center justify-center rounded-lg bg-[#EFD077] px-10 text-[11px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:brightness-110 active:scale-95"
+                        aria-label={`Learn more about ${event.title}`}
+                      >
+                        LEARN MORE
+                      </Link>
+                    </div>
                   </div>
                 </article>
               </FadeIn>
@@ -208,6 +212,39 @@ export default async function Home() {
                   <p className="text-[11px] uppercase tracking-[0.3em] text-zinc-500 mt-2 font-bold">Signature Dishes</p>
                 </div>
               </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Other Destinations */}
+      <section className="bg-black py-16 lg:py-24 border-t border-white/5">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <FadeIn>
+            <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#D4AF37]">
+              EXPLORE OUR OTHER DESTINATIONS
+            </h2>
+            <div className="mx-auto mt-6 h-px w-12 bg-[#D4AF37]" />
+
+            <div className="mt-20 flex flex-col items-center">
+              <a
+                href="https://lacreola.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center"
+              >
+                <div className="relative h-20 w-48 sm:h-24 sm:w-60 transition-transform duration-500 group-hover:scale-105">
+                  <Image
+                    src="/uploads/lacreola-logo.png"
+                    alt="La Creola Logo"
+                    fill
+                    className="object-contain brightness-0 invert opacity-70 transition-all group-hover:opacity-100 group-hover:brightness-100 group-hover:invert-0"
+                  />
+                </div>
+                <p className="mt-8 text-[11px] uppercase tracking-[0.4em] text-zinc-500 transition-colors group-hover:text-white">
+                  LA CREOLA RESTAURANT
+                </p>
+              </a>
             </div>
           </FadeIn>
         </div>
