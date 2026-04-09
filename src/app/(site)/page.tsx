@@ -238,7 +238,7 @@ export default async function Home() {
                     src="/uploads/lacreola-logo.png"
                     alt="La Creola Logo"
                     fill
-                    className="object-contain brightness-0 invert opacity-70 transition-all group-hover:opacity-100 group-hover:brightness-100 group-hover:invert-0"
+                    className="object-contain"
                   />
                 </div>
                 <p className="mt-8 text-[11px] uppercase tracking-[0.4em] text-zinc-500 transition-colors group-hover:text-white">
