@@ -4,7 +4,7 @@ import { addReservation, type ReservationRecord } from "@/lib/reservationsDb";
 
 export const runtime = "nodejs";
 
-const RESERVATIONS_EMAIL = "azzurrirwanda@gmail.com";
+const RESERVATIONS_EMAIL = "reservation@azzurrirwanda.com";
 
 async function sendReservationEmail(record: ReservationRecord) {
   const apiKey = process.env.RESEND_API_KEY;
@@ -13,7 +13,7 @@ async function sendReservationEmail(record: ReservationRecord) {
     return;
   }
 
-  const from = process.env.RESEND_FROM_EMAIL || "Azzurri Website <onboarding@resend.dev>";
+  const from = process.env.RESEND_FROM_EMAIL || "Azzurri Website <no-reply@azzurrirwanda.com>";
   const resend = new Resend(apiKey);
 
   const lines = [
