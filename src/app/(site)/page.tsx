@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { FadeIn } from "@/components/FadeIn";
 import { Testimonials } from "@/components/Testimonials";
 import { BlogSection } from "@/components/BlogSection";
+import { EventCard } from "@/components/EventCard";
 import { listEvents } from "@/lib/eventsDb";
 import { listGalleryImages } from "@/lib/galleryDb";
 import { getSiteContent } from "@/lib/siteContent";
@@ -138,37 +139,13 @@ export default async function Home() {
           <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {displayEvents.map((event, index) => (
               <FadeIn key={index} delay={80 * index}>
-                <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-[#030712] border border-white/5 transition-all hover:border-white/10 group">
-                  <div className="relative aspect-square overflow-hidden bg-zinc-900">
-                    <Image
-                      src={event.imageSrc}
-                      alt={event.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#030712] to-transparent" />
-                  </div>
-                  <div className="flex flex-1 flex-col px-7 pb-10 pt-4">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#EFD077]">
-                      {event.date}
-                    </p>
-                    <h3 className="mt-4 text-2xl font-medium tracking-normal text-white">
-                      {event.title}
-                    </h3>
-                    <p className="mt-4 text-sm leading-relaxed text-zinc-400 font-light line-clamp-2">
-                      {event.description}
-                    </p>
-                    <div className="mt-auto pt-10">
-                      <Link
-                        href={event.href}
-                        className="inline-flex h-11 items-center justify-center rounded-lg bg-[#EFD077] px-10 text-[11px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:brightness-110 active:scale-95"
-                        aria-label={`Learn more about ${event.title}`}
-                      >
-                        LEARN MORE
-                      </Link>
-                    </div>
-                  </div>
-                </article>
+                <EventCard
+                  title={event.title}
+                  description={event.description}
+                  date={event.date}
+                  imageUrl={event.imageSrc}
+                  href={event.href}
+                />
               </FadeIn>
             ))}
           </div>
