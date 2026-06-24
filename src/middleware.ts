@@ -4,16 +4,8 @@ import { getAdminCookieName, verifyAdminToken } from "@/lib/adminAuth";
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const maintenanceMode = true; // process.env.MAINTENANCE_MODE === "true";
-
   const isAdminPage = pathname.startsWith("/admin");
   const isAdminApi = pathname.startsWith("/api/admin");
-  const isMaintenancePage = pathname === "/maintenance";
-
-  // Handle Maintenance Mode
-  if (maintenanceMode && !isAdminPage && !isAdminApi && !isMaintenancePage) {
-    return NextResponse.rewrite(new URL("/maintenance", req.url));
-  }
 
   // Original Admin Auth Logic
   if (!isAdminPage && !isAdminApi) return NextResponse.next();
