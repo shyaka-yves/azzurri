@@ -9,12 +9,13 @@ interface MenuViewProps {
   zone?: 'restaurant' | 'club';
 }
 
-function isPdfUrl(url: string): boolean {
-  return /\.pdf($|\?|#)/i.test(url);
-}
-
 function isImageUrl(url: string): boolean {
   return /\.(png|jpe?g|webp|gif)($|\?|#)/i.test(url);
+}
+
+/** Cloudinary blocks direct PDF delivery; serve via same-origin proxy for iframe viewing. */
+function getMenuPdfViewerUrl(pdfUrl: string): string {
+  return `/api/menu-pdf?url=${encodeURIComponent(pdfUrl)}`;
 }
 
 export function MenuView({ content, zone = 'restaurant' }: MenuViewProps) {
@@ -23,8 +24,8 @@ export function MenuView({ content, zone = 'restaurant' }: MenuViewProps) {
     : content.menu.clubPdfUrl;
 
   const zoneLabel = zone === 'restaurant' ? 'Restaurant' : 'Club';
-  const isPdf = activePdf ? isPdfUrl(activePdf) : false;
   const isImage = activePdf ? isImageUrl(activePdf) : false;
+  const viewerUrl = activePdf && !isImage ? getMenuPdfViewerUrl(activePdf) : activePdf;
 
   return (
     <div className="relative overflow-hidden">
@@ -59,7 +60,7 @@ export function MenuView({ content, zone = 'restaurant' }: MenuViewProps) {
                   ) : (
                     <div className="relative w-full overflow-hidden rounded-lg bg-zinc-950">
                       <iframe
-                        src={`${activePdf}${isPdf ? '#view=FitH&toolbar=1&navpanes=0' : ''}`}
+                        src={viewerUrl}
                         className="h-[75vh] min-h-[480px] w-full border-0 md:h-[85vh] md:min-h-[650px]"
                         title={`${zoneLabel} Menu PDF`}
                       />
@@ -68,7 +69,7 @@ export function MenuView({ content, zone = 'restaurant' }: MenuViewProps) {
                 </div>
                 <div className="mt-8 flex justify-center">
                   <a
-                    href={activePdf}
+                    href={viewerUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full bg-azzurri-blue px-8 py-3 text-xs font-bold uppercase tracking-wider text-black transition-transform hover:scale-105 active:scale-95 shadow-xl shadow-blue-500/20"
