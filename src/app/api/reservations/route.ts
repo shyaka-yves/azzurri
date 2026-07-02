@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { addReservation, type ReservationRecord } from "@/lib/reservationsDb";
+import { formatDateTime } from "@/lib/formatDateTime";
 
 export const runtime = "nodejs";
 
@@ -21,7 +22,7 @@ async function sendReservationEmail(record: ReservationRecord) {
     `Email: ${record.email}`,
     record.phone ? `Phone: ${record.phone}` : null,
     `Area: ${record.zone === "club" ? "Club & Lounge" : "Rooftop Restaurant"}`,
-    record.date ? `Date & Time: ${record.date}` : null,
+    record.date ? `Date & Time: ${formatDateTime(record.date)}` : null,
     record.guests ? `Guests: ${record.guests}` : null,
     record.tableType ? `Table Area/Type: ${record.tableType}` : null,
     record.notes ? `Notes:\n${record.notes}` : null,
@@ -31,7 +32,7 @@ async function sendReservationEmail(record: ReservationRecord) {
     from,
     to: [RESERVATIONS_EMAIL],
     subject: `[Azzurri] New reservation from ${record.name}`,
-    text: `New table reservation request:\n\n${lines.join("\n")}\n\nSubmitted at: ${new Date(record.createdAt).toLocaleString()}`,
+    text: `New table reservation request:\n\n${lines.join("\n")}\n\nSubmitted at: ${formatDateTime(record.createdAt)}`,
   });
 }
 

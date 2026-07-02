@@ -57,13 +57,6 @@ export function BlogSection({
                 <p className="mt-4 text-[15px] leading-relaxed text-zinc-400 line-clamp-3 font-light lg:text-base">
                   {post.excerpt}
                 </p>
-                <a
-                  href={`/blog/${post.title.toLowerCase().replace(/ /g, "-")}`}
-                  className="mt-8 text-[11px] font-bold uppercase tracking-[0.3em] text-[#FDE68A] hover:underline"
-                  aria-label={`Read more about ${post.title}`}
-                >
-                  READ MORE
-                </a>
               </div>
             </article>
           </FadeIn>

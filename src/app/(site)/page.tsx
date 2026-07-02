@@ -144,7 +144,6 @@ export default async function Home() {
                   description={event.description}
                   date={event.date}
                   imageUrl={event.imageSrc}
-                  href={event.href}
                 />
               </FadeIn>
             ))}
