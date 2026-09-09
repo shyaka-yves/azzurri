@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef, MouseEvent } from 'react';
+'use client';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 
