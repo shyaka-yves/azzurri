@@ -5,6 +5,7 @@ import { FadeIn } from "@/components/FadeIn";
 import { Testimonials } from "@/components/Testimonials";
 import { BlogSection } from "@/components/BlogSection";
 import { EventCard } from "@/components/EventCard";
+import { EventCarousel } from "@/components/EventCarousel";
 import { listEvents } from "@/lib/eventsDb";
 import { listGalleryImages } from "@/lib/galleryDb";
 import { getSiteContent } from "@/lib/siteContent";
@@ -136,18 +137,9 @@ export default async function Home() {
             <div className="h-0.5 w-12 bg-[#EFD077] mx-auto mt-8" />
           </FadeIn>
 
-          <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {displayEvents.map((event, index) => (
-              <FadeIn key={index} delay={80 * index}>
-                <EventCard
-                  title={event.title}
-                  description={event.description}
-                  date={event.date}
-                  imageUrl={event.imageSrc}
-                />
-              </FadeIn>
-            ))}
-          </div>
+            <div className="mt-10">
+              <EventCarousel items={displayEvents} />
+            </div>
         </div>
       </section>
 
