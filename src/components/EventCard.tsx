@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
@@ -41,7 +42,7 @@ export function EventCard({ title, description, date, imageUrl }: EventCardProps
         </div>
       </article>
 
-      {isOpen && (
+      {isOpen && typeof document !== 'undefined' && createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm text-left">
           <div className="relative w-full max-w-4xl max-h-full bg-zinc-900 border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
             <button
@@ -71,7 +72,8 @@ export function EventCard({ title, description, date, imageUrl }: EventCardProps
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
