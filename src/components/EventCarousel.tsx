@@ -157,12 +157,12 @@ export function EventCarousel({ items }: { items: CarouselItem[] }) {
             >
               <XMarkIcon className="w-6 h-6" />
             </button>
-            <div className="relative w-full h-64 md:h-auto md:w-1/2 flex-shrink-0 md:min-h-[400px]">
+            <div className="relative w-full h-64 md:h-auto md:w-1/2 flex-shrink-0 md:min-h-[400px] bg-black/40">
               <Image
                 src={selectedEvent.imageSrc}
                 alt={selectedEvent.title}
                 fill
-                className="object-cover"
+                className="object-contain p-2 md:p-4"
               />
             </div>
             <div className="p-6 md:p-8 flex flex-col overflow-y-auto max-h-[60vh] md:max-h-[80vh]">
