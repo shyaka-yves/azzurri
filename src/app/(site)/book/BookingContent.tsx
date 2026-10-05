@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { useMemo, useState, useEffect } from 'react';
 import { ZoneSelector } from '@/components/ZoneSelector';
 import { FadeIn } from '@/components/FadeIn';
-import type { SiteContent } from '@/lib/siteContent';
+import type { SiteContent, BlockedDate } from '@/lib/siteContent';
 
 function getMinDateTimeValue(): string {
   const now = new Date();
@@ -16,7 +16,18 @@ function getMinDateTimeValue(): string {
   return iso.slice(0, 16);
 }
 
-export function BookingContent({ content }: { content: SiteContent }) {
+function getBlockedMessage(item: BlockedDate): string {
+  const reasonText = item.reason?.trim() ? ` ${item.reason.trim().replace(/\.*$/, '')}.` : '';
+  return `Reservations unavailable on ${item.date}.${reasonText} Please choose a different date.`;
+}
+
+interface BookingContentProps {
+  content: SiteContent;
+  blockedDates?: BlockedDate[];
+}
+
+export function BookingContent({ content, blockedDates: propBlockedDates }: BookingContentProps) {
+  const blockedDates = propBlockedDates ?? content.blockedDates ?? [];
   const minDateTime = useMemo(getMinDateTimeValue, []);
   const searchParams = useSearchParams();
 
@@ -42,6 +53,17 @@ export function BookingContent({ content }: { content: SiteContent }) {
   const [expandedImage, setExpandedImage] = useState<string | null>(null);
   const [selectedTableDetail, setSelectedTableDetail] = useState<any>(null);
 
+  const selectedDateStr = dateTime ? dateTime.slice(0, 10) : '';
+
+  const blockedInfo = useMemo(() => {
+    if (!selectedDateStr) return null;
+    return blockedDates.find((b) => {
+      if (b.date !== selectedDateStr) return false;
+      if (!b.zone || b.zone === 'all' || (b.zone as string) === 'both') return true;
+      return b.zone === zone;
+    });
+  }, [selectedDateStr, blockedDates, zone]);
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setMessage(null);
@@ -54,6 +76,23 @@ export function BookingContent({ content }: { content: SiteContent }) {
 
     if (!dateTime) {
       setError('Please choose a date and time.');
+      return;
+    }
+
+    if (blockedInfo) {
+      setError(getBlockedMessage(blockedInfo));
+      return;
+    }
+
+    const dateStr = dateTime.slice(0, 10);
+    const blocked = blockedDates.find((b) => {
+      if (b.date !== dateStr) return false;
+      if (!b.zone || b.zone === 'all' || (b.zone as string) === 'both') return true;
+      return b.zone === zone;
+    });
+
+    if (blocked) {
+      setError(getBlockedMessage(blocked));
       return;
     }
 
@@ -222,6 +261,25 @@ export function BookingContent({ content }: { content: SiteContent }) {
           </FadeIn>
         )}
 
+        {blockedInfo && (
+          <div className="rounded-2xl border border-red-500/30 bg-red-500/10 px-5 py-4 text-sm text-red-300 flex items-start sm:items-center gap-3">
+            <svg
+              className="h-5 w-5 shrink-0 text-red-400 mt-0.5 sm:mt-0"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <p>{getBlockedMessage(blockedInfo)}</p>
+          </div>
+        )}
+
         <form
           onSubmit={handleSubmit}
           className="card-glass grid gap-6 rounded-3xl border border-zinc-800 bg-black/60 p-6 shadow-xl shadow-black/60 sm:p-8 md:grid-cols-2"
@@ -275,10 +333,17 @@ export function BookingContent({ content }: { content: SiteContent }) {
                 <input
                   type="datetime-local"
                   value={dateTime}
-                  onChange={(e) => setDateTime(e.target.value)}
+                  onChange={(e) => {
+                    setDateTime(e.target.value);
+                    if (error) setError(null);
+                  }}
                   min={minDateTime}
                   style={{ colorScheme: 'dark' }}
-                  className="w-full rounded-full border border-zinc-700 bg-black/60 px-4 py-2.5 text-sm text-white outline-none ring-0 transition focus:border-gold [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                  className={`w-full rounded-full bg-black/60 px-4 py-2.5 text-sm text-white outline-none ring-0 transition [&::-webkit-calendar-picker-indicator]:cursor-pointer ${
+                    blockedInfo
+                      ? 'border border-red-500 focus:border-red-400'
+                      : 'border border-zinc-700 focus:border-gold'
+                  }`}
                   required
                 />
               </div>
@@ -428,3 +493,5 @@ export function BookingContent({ content }: { content: SiteContent }) {
     </main>
   );
 }
+
+export const BookingForm = BookingContent;

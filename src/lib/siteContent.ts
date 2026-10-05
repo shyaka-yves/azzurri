@@ -139,6 +139,12 @@ export type TableDetail = {
   description: string;
 };
 
+export type BlockedDate = {
+  date: string;
+  reason?: string;
+  zone?: 'all' | 'restaurant' | 'club';
+};
+
 export type SiteContent = {
   hero: HeroContent;
   about: AboutContent;
@@ -156,6 +162,7 @@ export type SiteContent = {
   socialLinks: SocialLinksContent;
   reservations: ReservationsContent & { clubTableDetails?: TableDetail[] };
   clubPage?: ClubPageContent;
+  blockedDates?: BlockedDate[];
 };
 
 export type ReservationRecord = {
@@ -348,7 +355,8 @@ function getDefaultContent(): SiteContent {
         ],
         imageSrc: "/uploads/event-2.jpg",
       }
-    }
+    },
+    blockedDates: []
   };
 }
 
@@ -387,6 +395,7 @@ export async function getSiteContent(): Promise<SiteContent> {
       specialOffers: { ...defaults.specialOffers, ...parsed.specialOffers },
       socialLinks: { ...defaults.socialLinks, ...parsed.socialLinks },
       reservations: { ...defaults.reservations, ...parsed.reservations },
+      blockedDates: Array.isArray(parsed.blockedDates) ? parsed.blockedDates : (defaults.blockedDates || []),
       clubPage: parsed.clubPage ? {
         hero: { ...defaults.clubPage!.hero, ...parsed.clubPage.hero },
         about: { ...defaults.clubPage!.about, ...parsed.clubPage.about },

@@ -13,7 +13,7 @@ export default async function BookPage() {
         <div className="text-[#D4AF37] animate-pulse">Loading Booking Form...</div>
       </main>
     }>
-      <BookingContent content={content} />
+      <BookingContent content={content} blockedDates={content.blockedDates || []} />
     </Suspense>
   );
 }

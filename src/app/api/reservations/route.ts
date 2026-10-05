@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { addReservation, type ReservationRecord } from "@/lib/reservationsDb";
 import { formatDateTime } from "@/lib/formatDateTime";
+import { getSiteContent } from "@/lib/siteContent";
 
 export const runtime = "nodejs";
 
@@ -89,6 +90,27 @@ export async function POST(req: Request) {
           error: "Bookings must be at least 2 hours from now. Please choose a later time.",
         },
         { status: 400 },
+      );
+    }
+
+    const content = await getSiteContent();
+    const dateStr = date.slice(0, 10);
+    const blocked = (content.blockedDates || []).find((b) => {
+      const matchDate = b.date === dateStr;
+      const matchZone = !b.zone || b.zone === "all" || (b.zone as string) === "both" || !zone || b.zone === zone;
+      return matchDate && matchZone;
+    });
+
+    if (blocked) {
+      const reasonPart = blocked.reason?.trim()
+        ? ` ${blocked.reason.trim().replace(/\.*$/, "")}.`
+        : "";
+      return NextResponse.json(
+        {
+          ok: false,
+          error: `Reservations unavailable on ${blocked.date}.${reasonPart} Please choose a different date.`,
+        },
+        { status: 400 }
       );
     }
 
