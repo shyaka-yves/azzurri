@@ -26,15 +26,22 @@ export default async function Home() {
     listGalleryImages()
   ]);
 
-  const upcomingEvent = events.length > 0 ? events[0] : null;
+  const sortedEvents = [...events].sort((a, b) => {
+    const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+    const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+    if (timeB !== timeA) return timeB - timeA;
+    return (b.order ?? 0) - (a.order ?? 0);
+  });
+
+  const upcomingEvent = sortedEvents.length > 0 ? sortedEvents[0] : null;
 
   const displayGallery = gallery.length > 0
     ? gallery.slice(0, 6)
     : content.gallery.items.slice(0, 6).map((item, idx) => ({ id: `content-${idx}`, imageUrl: item.imageSrc, label: item.alt }));
 
-  // Combine and standardize events for display
-  const displayEvents = (events.length > 0
-    ? events.map(e => ({
+  // Combine and standardize events for display (newest inserted events first)
+  const displayEvents = sortedEvents.length > 0
+    ? sortedEvents.map(e => ({
       title: e.title,
       description: e.description,
       date: e.date,
@@ -47,7 +54,7 @@ export default async function Home() {
       date: e.date,
       imageSrc: e.imageSrc,
       href: "/events"
-    }))).slice(0, 3);
+    }));
 
   return (
     <div className="relative overflow-hidden bg-black">

@@ -25,7 +25,14 @@ export function EventsView({ events, zone = 'restaurant', hideZoneSelector = fal
     }
   }, [searchParams]);
 
-  const filteredEvents = events.filter(event => event.zone === activeZone || event.zone === 'both'); 
+  const sortedEvents = [...events].sort((a, b) => {
+    const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+    const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+    if (timeB !== timeA) return timeB - timeA;
+    return (b.order ?? 0) - (a.order ?? 0);
+  });
+
+  const filteredEvents = sortedEvents.filter(event => event.zone === activeZone || event.zone === 'both'); 
 
   return (
     <div className="relative overflow-hidden">

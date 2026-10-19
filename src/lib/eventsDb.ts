@@ -25,9 +25,18 @@ const mapRow = (r: { id: string; date: string; title: string; description: strin
 export async function listEvents(): Promise<Event[]> {
   try {
     const supabase = getSupabase();
-    const { data, error } = await supabase.from("events").select("*").order("order", { ascending: true });
+    const { data, error } = await supabase
+      .from("events")
+      .select("*")
+      .order("created_at", { ascending: false });
     if (error) return [];
-    return (data ?? []).map(mapRow);
+    const mapped = (data ?? []).map(mapRow);
+    return mapped.sort((a, b) => {
+      const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+      const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+      if (timeB !== timeA) return timeB - timeA;
+      return (b.order ?? 0) - (a.order ?? 0);
+    });
   } catch {
     return [];
   }
